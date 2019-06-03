@@ -16,6 +16,7 @@ Lobby::Lobby(QWidget *parent) :
     hideButtons(ui->rulesbutton);
     hideButtons(ui->authorbutton);
     hideButtons(ui->quitbutton);
+    ui->graphiclabel->hide();   //graphic for pressing author purposes
 
 }
 
@@ -75,8 +76,7 @@ void Lobby::on_startShips_clicked()
 }
 
 
-
-void Lobby::on_rulesbutton_clicked()        //Thats to change into dialog
+void Lobby::on_rulesbutton_clicked()        //rules
 {
     QMessageBox::information(this,"Rules", "Game takes part in two rounds. In first you are trying to guess a word that computer generated for you, "
                                            "firstly you can ask him for 10 letters, if the word contain them you will show it on your screen with their position in computer word. "
@@ -89,6 +89,7 @@ void Lobby::on_authorbutton_clicked()       //Highliting info about me
 {
     ui->textEdit->setStyleSheet("border: 1px solid red; color:black; background-color:#42f445;");
     ui->textEdit_2->setStyleSheet("border: 1px solid red; color:black; background-color:#42f445;");
+    ui->graphiclabel->show();
 }
 void Lobby::on_quitbutton_clicked()         //Quiting game
 {
