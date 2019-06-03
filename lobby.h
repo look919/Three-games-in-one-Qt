@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QPushButton>
-// #include "game.h"  going to change that name
+#include "trainyourmemory.h"
 
 namespace Ui {
 class Lobby;
