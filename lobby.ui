@@ -191,7 +191,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="optionbutton">
+  <widget class="QPushButton" name="switchButton">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -204,7 +204,7 @@ p, li { white-space: pre-wrap; }
     <string>-&gt;</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="newgamebutton">
+  <widget class="QPushButton" name="startGuessMyWord">
    <property name="geometry">
     <rect>
      <x>90</x>
@@ -219,7 +219,7 @@ p, li { white-space: pre-wrap; }
     </font>
    </property>
    <property name="text">
-    <string>New game</string>
+    <string>Guess my word</string>
    </property>
    <property name="flat">
     <bool>false</bool>
@@ -246,15 +246,59 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
   </widget>
+  <widget class="QPushButton" name="startTrainYourMemory">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>80</y>
+     <width>431</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>30</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Train your memory</string>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="startShips">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>80</y>
+     <width>431</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>30</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Ships</string>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+  </widget>
   <zorder>quitbutton</zorder>
-  <zorder>newgamebutton</zorder>
   <zorder>authorbutton</zorder>
   <zorder>titlelabel</zorder>
   <zorder>graphiclabel</zorder>
   <zorder>rulesbutton</zorder>
   <zorder>textEdit</zorder>
   <zorder>textEdit_2</zorder>
-  <zorder>optionbutton</zorder>
+  <zorder>switchButton</zorder>
+  <zorder>startGuessMyWord</zorder>
+  <zorder>startTrainYourMemory</zorder>
+  <zorder>startShips</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
