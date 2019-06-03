@@ -1,14 +1,14 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
-#include <QWidget>
+#include <QDialog>
 #include <QPushButton>
 
 namespace Ui {
 class Trainyourmemory;
 }
 
-class Trainyourmemory : public QWidget
+class Trainyourmemory : public QDialog
 {
     Q_OBJECT
 

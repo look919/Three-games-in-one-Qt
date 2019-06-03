@@ -5,7 +5,7 @@
 #include <QTime>
 
 Trainyourmemory::Trainyourmemory(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     ui(new Ui::Trainyourmemory)
 {
     ui->setupUi(this);
