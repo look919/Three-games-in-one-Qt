@@ -1,6 +1,5 @@
 #include "lobby.h"
 #include "ui_lobby.h"
-#include "trainyourmemory.h"
 #include <QMessageBox>
 
 Lobby::Lobby(QWidget *parent) :
@@ -65,7 +64,9 @@ void Lobby::on_switchButton_clicked()   //Most important button in lobby
 //Games
 void Lobby::on_startGuessMyWord_clicked()
 {
-
+    Guessmyword newgame(this);
+    newgame.setModal(true);
+    newgame.exec();
 }
 void Lobby::on_startTrainYourMemory_clicked()
 {
@@ -75,7 +76,9 @@ void Lobby::on_startTrainYourMemory_clicked()
 }
 void Lobby::on_startShips_clicked()
 {
-
+    Ships newgame(this);
+    newgame.setModal(true);
+    newgame.exec();
 }
 
 

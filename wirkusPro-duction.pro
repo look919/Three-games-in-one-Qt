@@ -27,15 +27,21 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         lobby.cpp \
-    trainyourmemory.cpp
+        trainyourmemory.cpp \
+        ships.cpp \
+    guessmyword.cpp
 
 HEADERS += \
         lobby.h \
-    trainyourmemory.h
+        trainyourmemory.h \
+        ships.h \
+    guessmyword.h
 
 FORMS += \
         lobby.ui \
-    trainyourmemory.ui
+        trainyourmemory.ui \
+        ships.ui \
+    guessmyword.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
