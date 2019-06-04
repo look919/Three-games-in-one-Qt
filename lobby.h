@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include "trainyourmemory.h"
+#include "ships.h"
 
 namespace Ui {
 class Lobby;
@@ -30,6 +31,7 @@ private slots:
 
     void hideButtons(QPushButton *b1);       //hide/showbuttons
     void showButtons(QPushButton *b1);
+
 
 
 private:

@@ -4,5 +4,8 @@
         <file>img/happy.jpg</file>
         <file>img/main.png</file>
         <file>img/sad.jpg</file>
+        <file>img/background.jpg</file>
+        <file>img/ship.jpg</file>
+        <file>img/vs.png</file>
     </qresource>
 </RCC>
