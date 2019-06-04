@@ -64,7 +64,9 @@ void Lobby::on_switchButton_clicked()   //Most important button in lobby
 //Games
 void Lobby::on_startGuessMyWord_clicked()
 {
-
+    Guessmyword newgame(this);
+    newgame.setModal(true);
+    newgame.exec();
 }
 void Lobby::on_startTrainYourMemory_clicked()
 {

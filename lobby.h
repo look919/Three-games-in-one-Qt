@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include "trainyourmemory.h"
 #include "ships.h"
+#include "guessmyword.h"
 
 namespace Ui {
 class Lobby;
