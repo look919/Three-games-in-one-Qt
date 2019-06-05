@@ -40,7 +40,7 @@
    <property name="font">
     <font>
      <family>Narkisim</family>
-     <pointsize>36</pointsize>
+     <pointsize>30</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
@@ -317,6 +317,17 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
   </widget>
+  <widget class="QWidget" name="formLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>150</y>
+     <width>160</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="formLayout"/>
+  </widget>
   <zorder>quitbutton</zorder>
   <zorder>authorbutton</zorder>
   <zorder>titlelabel</zorder>
@@ -328,6 +339,7 @@ p, li { white-space: pre-wrap; }
   <zorder>startGuessMyWord</zorder>
   <zorder>startTrainYourMemory</zorder>
   <zorder>startShips</zorder>
+  <zorder>formLayoutWidget</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
