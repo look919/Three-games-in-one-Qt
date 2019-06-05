@@ -415,7 +415,7 @@ void Guessmyword::endscreen()
             }
             else
             {
-                ui->commentator->setText("Seems we have drawn, how about rematch?");
+                ui->commentator->setText("Draw? I can accept that, how about rematch?");
                 ui->lettershower->hide();
                 ui->guessthepasswordbutton->show();
                 ui->guessthepasswordbutton->setText("Quit");

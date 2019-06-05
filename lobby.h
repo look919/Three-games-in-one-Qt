@@ -6,6 +6,7 @@
 #include "trainyourmemory.h"
 #include "ships.h"
 #include "guessmyword.h"
+#include "rules.h"
 
 namespace Ui {
 class Lobby;

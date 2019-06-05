@@ -84,12 +84,9 @@ void Lobby::on_startShips_clicked()
 
 void Lobby::on_rulesbutton_clicked()        //rules
 {
-    QMessageBox::information(this,"Rules", "Game takes part in two rounds. In first you are trying to guess a word that computer generated for you, "
-                                           "firstly you can ask him for 10 letters, if the word contain them you will show it on your screen with their position in computer word. "
-                                           "If u are sure of your answer, fill the field bellow, but remember you have only one shot! "
-                                           "In second round you create your own word, but there are some rules, "
-                                           "it should contain from 4 to 12 letters and you cannot use proper names, after that its computer time to guess. "
-                                           "Wins a person or machine who answered correctly and used fewer letters. Goodluck!");
+    Rules newgame(this);
+    newgame.setModal(true);
+    newgame.exec();
 }
 void Lobby::on_authorbutton_clicked()       //Highliting info about me
 {

@@ -29,19 +29,22 @@ SOURCES += \
         lobby.cpp \
         trainyourmemory.cpp \
         ships.cpp \
-    guessmyword.cpp
+    guessmyword.cpp \
+    rules.cpp
 
 HEADERS += \
         lobby.h \
         trainyourmemory.h \
         ships.h \
-    guessmyword.h
+    guessmyword.h \
+    rules.h
 
 FORMS += \
         lobby.ui \
         trainyourmemory.ui \
         ships.ui \
-    guessmyword.ui
+    guessmyword.ui \
+    rules.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
