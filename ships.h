@@ -137,6 +137,7 @@ private:
     //Variables that are used to generate computer ships
     int cord1;  //firsthalfofcoordinates
     int cord2;  //secondhalfofcoordinates
+    int numberOfShots;
     QString cord1s; //the same in Qstring
     QString cord2s; //the same in Qstring
     QString cord;   //coordinates connected/united;
