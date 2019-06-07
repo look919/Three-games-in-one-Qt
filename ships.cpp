@@ -141,50 +141,75 @@ void Ships::generatecomputerships()
 }
 void Ships::createcomputerships(int n)
 {
-    if(n==4)
-    {
-        if(cord2<=3)
-        {
-            for(int j=0;j<n-1;j++)
-            {
-                if(cord2s=="1") cord2s="2";
-                else if(cord2s=="2") cord2s="3";
-                else if(cord2s=="3") cord2s="4";
-                else if(cord2s=="4") cord2s="5";
-                else if(cord2s=="5") cord2s="6";
+    bool vertically; //true - ship is placed vertically, false - horizontally
+    int random = rand()%2;
+    if(random==0) vertically=true;
+    else vertically = false;
 
-                cord="C_"+cord1s+cord2s;
-                savedshipselements.push_back(cord);
+        if(vertically)              //if vertically
+        {
+            if(cord2<=3)
+            {
+                for(int j=0;j<n-1;j++)
+                {
+                    if(cord2s=="1") cord2s="2";
+                    else if(cord2s=="2") cord2s="3";
+                    else if(cord2s=="3") cord2s="4";
+                    else if(cord2s=="4") cord2s="5";
+                    else if(cord2s=="5") cord2s="6";
+
+                    cord="C_"+cord1s+cord2s;
+                    savedshipselements.push_back(cord);
+                }
+            }
+            else
+            {
+                for(int j=0;j<n-1;j++)
+                {
+                    if(cord2s=="6") cord2s="5";
+                    else if(cord2s=="5") cord2s="4";
+                    else if(cord2s=="4") cord2s="3";
+                    else if(cord2s=="3") cord2s="2";
+                    else if(cord2s=="2") cord2s="1";
+
+                    cord="C_"+cord1s+cord2s;
+                    savedshipselements.push_back(cord);
+                }
             }
         }
-        else if(cord1<=3)
+        else if(!vertically)                        //if horizontally
         {
-            for(int j=0;j<n-1;j++)
-            {
-                if(cord1s=="A") cord1s="B";
-                else if(cord1s=="B") cord1s="C";
-                else if(cord1s=="C") cord1s="D";
-                else if(cord1s=="D") cord1s="E";
-                else if(cord1s=="E") cord1s="F";
+           if(cord1<=3)
+           {
+                for(int j=0;j<n-1;j++)
+                {
+                    if(cord1s=="A") cord1s="B";
+                    else if(cord1s=="B") cord1s="C";
+                    else if(cord1s=="C") cord1s="D";
+                    else if(cord1s=="D") cord1s="E";
+                    else if(cord1s=="E") cord1s="F";
 
-                cord="C_"+cord1s+cord2s;
-                savedshipselements.push_back(cord);
-            }
-        }
-        else if(cord1>3)
-        {
-            for(int j=0;j<n-1;j++)
-            {
-                if(cord1s=="F") cord1s="E";
-                else if(cord1s=="E") cord1s="D";
-                else if(cord1s=="D") cord1s="C";
-                else if(cord1s=="C") cord1s="B";
-                else if(cord1s=="B") cord1s="A";
+                    cord="C_"+cord1s+cord2s;
+                    savedshipselements.push_back(cord);
+                }
+           }
+           else
+           {
+               for(int j=0;j<n-1;j++)
+               {
+                   if(cord1s=="F") cord1s="E";
+                   else if(cord1s=="E") cord1s="D";
+                   else if(cord1s=="D") cord1s="C";
+                   else if(cord1s=="C") cord1s="B";
+                   else if(cord1s=="B") cord1s="A";
 
-                cord="C_"+cord1s+cord2s;
-                savedshipselements.push_back(cord);
-            }
+                   cord="C_"+cord1s+cord2s;
+                   savedshipselements.push_back(cord);
+               }
+           }
         }
+
+
         for(int i=0;i<computerships.size();i++)
         {
             for(int j=0;j<savedshipselements.size();j++)
@@ -195,7 +220,8 @@ void Ships::createcomputerships(int n)
                 }
             }
         }
-        if(error==true)
+
+        if(error==true) //IF generated ship has the same coordinates like the previous ship
         {
             error=false;
             savedshipselements.clear();
@@ -211,145 +237,6 @@ void Ships::createcomputerships(int n)
             savedshipselements.clear();
         }
     }
-    else if(n==3)
-    {
-        if(cord1>3)
-        {
-            for(int j=0;j<n-1;j++)
-            {
-                if(cord1s=="F") cord1s="E";
-                else if(cord1s=="E") cord1s="D";
-                else if(cord1s=="D") cord1s="C";
-                else if(cord1s=="C") cord1s="B";
-                else if(cord1s=="B") cord1s="A";
-
-                cord="C_"+cord1s+cord2s;
-                savedshipselements.push_back(cord);
-            }
-        }
-        else if(cord2>3)
-        {
-            for(int j=0;j<n-1;j++)
-            {
-                if(cord2s=="6") cord2s="5";
-                else if(cord2s=="5") cord2s="4";
-                else if(cord2s=="4") cord2s="3";
-                else if(cord2s=="3") cord2s="2";
-                else if(cord2s=="2") cord2s="1";
-
-                cord="C_"+cord1s+cord2s;
-                savedshipselements.push_back(cord);
-            }
-        }
-        else if(cord2<=3)
-        {
-            for(int j=0;j<n-1;j++)
-            {
-                if(cord2s=="1") cord2s="2";
-                else if(cord2s=="2") cord2s="3";
-                else if(cord2s=="3") cord2s="4";
-                else if(cord2s=="4") cord2s="5";
-
-                cord="C_"+cord1s+cord2s;
-                savedshipselements.push_back(cord);
-            }
-        }
-        for(int i=0;i<computerships.size();i++)
-        {
-            for(int j=0;j<savedshipselements.size();j++)
-            {
-                if(savedshipselements.at(j)==computerships.at(i))
-                {
-                    error=true;
-                }
-            }
-        }
-        if(error==true)
-        {
-            error=false;
-            savedshipselements.clear();
-            generatecomputerships();
-            createcomputerships(n);
-        }
-        else
-        {
-            for(int i=0;i<savedshipselements.size();i++)
-            {
-                computerships.push_back(savedshipselements.at(i));
-            }
-            savedshipselements.clear();
-        }
-    }
-    else if(n==2)
-    {
-        if(cord1<3)
-        {
-            for(int j=0;j<n-1;j++)
-            {
-                if(cord1s=="A") cord1s="B";
-                else if(cord1s=="B") cord1s="C";
-                else if(cord1s=="C") cord1s="D";
-                else if(cord1s=="D") cord1s="E";
-
-                cord="C_"+cord1s+cord2s;
-                savedshipselements.push_back(cord);
-            }
-        }
-        else if(cord2<=3)
-        {
-            for(int j=0;j<n-1;j++)
-            {
-                if(cord2s=="1") cord2s="2";
-                else if(cord2s=="2") cord2s="3";
-                else if(cord2s=="3") cord2s="4";
-                else if(cord2s=="4") cord2s="5";
-                else if(cord2s=="5") cord2s="6";
-
-                cord="C_"+cord1s+cord2s;
-                savedshipselements.push_back(cord);
-            }
-        }
-        else if(cord2>3)
-        {
-            for(int j=0;j<n-1;j++)
-            {
-                if(cord2s=="6") cord2s="5";
-                else if(cord2s=="5") cord2s="4";
-                else if(cord2s=="4") cord2s="3";
-                else if(cord2s=="3") cord2s="2";
-                else if(cord2s=="2") cord2s="1";
-
-                cord="C_"+cord1s+cord2s;
-                savedshipselements.push_back(cord);
-            }
-        }
-        for(int i=0;i<computerships.size();i++)
-        {
-            for(int j=0;j<savedshipselements.size();j++)
-            {
-                if(savedshipselements.at(j)==computerships.at(i))
-                {
-                    error=true;
-                }
-            }
-        }
-        if(error==true)
-        {
-            error=false;
-            savedshipselements.clear();
-            generatecomputerships();
-            createcomputerships(n);
-        }
-        else
-        {
-            for(int i=0;i<savedshipselements.size();i++)
-            {
-                computerships.push_back(savedshipselements.at(i));
-            }
-            savedshipselements.clear();
-        }
-    }
-}
 
 
 
@@ -517,14 +404,6 @@ void Ships::cpushot()
                 break;
             }
         }
-        else if(difficulty==2 && numberOfShots<16)      //else if to hard lvl- even worse shooting - final non random
-        {
-            if( Cord_bigger2 == computershots.at(i))
-            {
-                error=true;
-                break;
-            }
-        }
 
 
         if(cord==computershots.at(i))   //casual checking if random cord is the same like previous shots
@@ -543,7 +422,6 @@ void Ships::cpushot()
     {
         computershots.push_back(cord);
         numberOfShots++;
-        qDebug()<<numberOfShots;
     }
 
 
