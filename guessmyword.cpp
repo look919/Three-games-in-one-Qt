@@ -154,31 +154,43 @@ void Guessmyword::createtableword()
     {
         ifexist=false;
 
+
         for (int j=0;j<generatedletters.size();j++)
         {
-            if(level==1 && i==0 && gamecounter==0)    //statment for easy level
+            if(level==1 && i==0 && gamecounter==0)    //statment for easy level - free first letter
             {
                 tableword+=generatedword[i]+" ";
                 ifexist=true;
-                letterexist=true;
                 break;
             }
-            else if(level==2 && i==wordlength-1 && gamecounter==0)    //statement for normal level
+            else if(level==2 && i==wordlength-1 && gamecounter==0)    //statement for normal level - free last letter
             {
                 tableword+=generatedword[i]+" ";
                 ifexist=true;
-                letterexist=true;
                 break;
             }
             if(generatedletters[j]==generatedword[i])   //casual statment
             {
                 tableword+=generatedword[i]+" ";
                 ifexist=true;
-                letterexist=true;
                 break;
             }
         }
          if(ifexist==false) tableword+="_ ";
+
+
+    }
+    if(generatedletters.size()>=1)
+    {
+        int lastIndex=generatedletters.size()-1;
+        for(int k=0;k<wordlength;k++)
+        {
+            if(generatedletters[lastIndex]==generatedword[k])
+            {
+                letterexist=true;
+                break;
+            }
+        }
     }
 }
 
@@ -370,6 +382,163 @@ void Guessmyword::computerguesses()
     }
 }
 
+
+
+
+void Guessmyword::setuiforpc(QString s1)
+{
+    QPixmap sad(":/img/sad.jpg");
+    QPixmap happy(":/img/happy.jpg");
+    ui->lettershower->setText(s1);
+    ui->lettershower->show();
+
+    generatedletters.push_back(s1);
+    createtableword();
+    ui->table->setText(tableword);
+    ui->table->setAlignment(Qt::AlignCenter);
+
+    lettersleft--;
+    QString s=QString::number(lettersleft);
+    QString text=QString("Remaining letters: %1").arg(s);
+    ui->remainingletterslabel->setText(text);
+
+    if(letterexist)
+    {
+        ui->commentator->setPixmap(happy.scaled(60,60));
+        letterexist=false;
+    }
+    else
+    {
+        ui->commentator->setPixmap(sad.scaled(60,60));
+    }
+}
+
+void Guessmyword::makewordlistshorter(QString s1)
+{
+    letterexist=false;
+    for(int i=0;i<generatedword.size();i++)          //Checking the position --idk why it didnt work in createtable function
+    {
+        if(generatedword[i]==s1)
+        {
+            letterposition=i;
+            letterexist=true;
+        }
+    }
+
+    if(letterexist)
+    {
+        for(int i=0;i<listofwords.size();i++)
+        {
+           if(listofwords.at(i)[letterposition]!=s1)
+           {
+               listofwords.erase(listofwords.begin()+i);
+               i=-1;
+           }
+        }
+    }
+    else
+    {
+        for(int i=0;i<listofwords.size();i++)
+        {
+            QString currentword=listofwords[i];
+            for(int j=0;j<currentword.length();j++)
+               {
+                    if(currentword.at(j)==s1)
+                    {
+                        listofwords.erase(listofwords.begin()+i);
+                        i=-1;
+                        break;
+                    }
+               }
+        }
+    }
+}
+
+void Guessmyword::conditionaloflistelements()
+{
+    if(listofwords.size()==0)
+    {
+        ui->lettershower->setStyleSheet("font-size: 14px;");
+        ui->lettershower->setText("I Give up!");
+        ui->lettershower->setStyleSheet("font-size: 24px;");
+        computerscore=0;
+        delay(5);
+        ui->table->setText(generatedword);
+        ui->table->setAlignment(Qt::AlignCenter);
+        ui->commentator->setText("That was way too hard for me!");
+        ui->lettershower->hide();
+        ui->password->hide();
+        ifexist=true;
+    }
+    else if (listofwords.size()<=2)
+    {
+        ui->lettershower->setStyleSheet("font-size: 16px;");
+        ui->lettershower->setText("In my opinion the world is ->");
+        ui->commentator->setStyleSheet("font-size: 24px;");
+        ui->commentator->setText(listofwords[0]);
+        delay(5);
+        if(listofwords[0]==generatedword)
+        {
+            computerscore=10-lettersleft;
+            ui->commentator->setStyleSheet("font-size: 14px;");
+            ui->commentator->setText("Yay! I was right!");
+            ui->lettershower->hide();
+            ui->password->hide();
+        }
+        else
+        {
+            computerscore=0;
+            ui->commentator->setStyleSheet("font-size: 14px;");
+            ui->commentator->setText("Oh no! How could i forget about that word!");
+            ui->lettershower->hide();
+            ui->password->hide();
+        }
+        ui->table->setText(generatedword);
+        ui->table->setAlignment(Qt::AlignCenter);
+    }
+    else if(lettersleft==0)
+    {
+        srand((static_cast<unsigned int>(time(nullptr))));
+
+        int random=rand()%listofwords.size();
+        ui->lettershower->setStyleSheet("font-size: 14px;");
+        ui->lettershower->setText("In my opinion the world is ->");
+        ui->commentator->setStyleSheet("font-size: 24px;");
+        ui->commentator->setText(listofwords[random]);
+        delay(5);
+        if(listofwords[random]==generatedword)
+        {
+            computerscore=10-lettersleft;
+            ui->commentator->setStyleSheet("font-size: 14px;");
+            ui->commentator->setText("Yay! I was right!");
+            ui->lettershower->hide();
+             ui->password->hide();
+        }
+        else
+        {
+            computerscore=0;
+            ui->commentator->setStyleSheet("font-size: 14px;");
+            ui->commentator->setText("Oh no! I should've know that!");
+            ui->lettershower->hide();
+             ui->password->hide();
+        }
+        ui->table->setText(generatedword);
+        ui->table->setAlignment(Qt::AlignCenter);
+    }
+    else if(level==3 && listofwords.size()<30)
+    {
+        wordlisthaslessthantenelements=true;
+    }
+    else if(level==2 && listofwords.size()<20)
+    {
+        wordlisthaslessthantenelements=true;
+    }
+    else if(level==1 && listofwords.size()<14)
+    {
+        wordlisthaslessthantenelements=true;
+    }
+}
+
 void Guessmyword::endscreen()
 {
     delay(3);
@@ -466,153 +635,6 @@ void Guessmyword::endscreen()
           ui->guessthepasswordbutton->show();
           ui->guessthepasswordbutton->setText("Quit");
           gamecounter++;
-    }
-}
-
-
-void Guessmyword::setuiforpc(QString s1)
-{
-    QPixmap sad(":/img/sad.jpg");
-    QPixmap happy(":/img/happy.jpg");
-    ui->lettershower->setText(s1);
-    ui->lettershower->show();
-
-    generatedletters.push_back(s1);
-    createtableword();
-    ui->table->setText(tableword);
-    ui->table->setAlignment(Qt::AlignCenter);
-
-
-    lettersleft--;
-    QString s=QString::number(lettersleft);
-    QString text=QString("Remaining letters: %1").arg(s);
-    ui->remainingletterslabel->setText(text);
-
-    if(letterexist)
-    {
-        ui->commentator->setPixmap(happy.scaled(60,60));
-    }
-    else
-    {
-        ui->commentator->setPixmap(sad.scaled(60,60));
-    }
-}
-
-void Guessmyword::makewordlistshorter(QString s1)
-{
-    letterexist=false;
-    for(int i=0;i<generatedword.size();i++)          //Checking the position --idk why it didnt work in createtable function
-    {
-        if(generatedword[i]==s1)
-        {
-            letterposition=i;
-            letterexist=true;
-        }
-    }
-
-    if(letterexist)
-    {
-        for(int i=0;i<listofwords.size();i++)
-        {
-           if(listofwords.at(i)[letterposition]!=s1)
-           {
-               listofwords.erase(listofwords.begin()+i);
-               i=-1;
-           }
-        }
-    }
-    else
-    {
-        for(int i=0;i<listofwords.size();i++)
-        {
-            QString currentword=listofwords[i];
-            for(int j=0;j<currentword.length();j++)
-               {
-                    if(currentword.at(j)==s1)
-                    {
-                        listofwords.erase(listofwords.begin()+i);
-                        i=-1;
-                        break;
-                    }
-               }
-        }
-    }
-}
-
-void Guessmyword::conditionaloflistelements()
-{
-    if(listofwords.size()==0)
-    {
-        ui->lettershower->setStyleSheet("font-size: 14px;");
-        ui->lettershower->setText("I Give up!");
-        ui->lettershower->setStyleSheet("font-size: 24px;");
-        computerscore=0;
-        delay(5);
-        ui->table->setText(generatedword);
-        ui->table->setAlignment(Qt::AlignCenter);
-        ui->commentator->setText("That was way too hard for me!");
-        ui->lettershower->hide();
-        ui->password->hide();
-        ifexist=true;
-    }
-    else if (listofwords.size()<=2)
-    {
-        ui->lettershower->setStyleSheet("font-size: 16px;");
-        ui->lettershower->setText("In my opinion the world is ->");
-        ui->commentator->setStyleSheet("font-size: 24px;");
-        ui->commentator->setText(listofwords[0]);
-        delay(5);
-        if(listofwords[0]==generatedword)
-        {
-            computerscore=10-lettersleft;
-            ui->commentator->setStyleSheet("font-size: 14px;");
-            ui->commentator->setText("Yay! I was right!");
-            ui->lettershower->hide();
-             ui->password->hide();
-        }
-        else
-        {
-            computerscore=0;
-            ui->commentator->setStyleSheet("font-size: 14px;");
-            ui->commentator->setText("Oh no! How could i forget about that word!");
-            ui->lettershower->hide();
-             ui->password->hide();
-        }
-        ui->table->setText(generatedword);
-        ui->table->setAlignment(Qt::AlignCenter);
-    }
-    else if(lettersleft==0)
-    {
-        srand((static_cast<unsigned int>(time(nullptr))));
-
-        int random=rand()%listofwords.size();
-        ui->lettershower->setStyleSheet("font-size: 14px;");
-        ui->lettershower->setText("In my opinion the world is ->");
-        ui->commentator->setStyleSheet("font-size: 24px;");
-        ui->commentator->setText(listofwords[random]);
-        delay(5);
-        if(listofwords[random]==generatedword)
-        {
-            computerscore=10-lettersleft;
-            ui->commentator->setStyleSheet("font-size: 14px;");
-            ui->commentator->setText("Yay! I was right!");
-            ui->lettershower->hide();
-             ui->password->hide();
-        }
-        else
-        {
-            computerscore=0;
-            ui->commentator->setStyleSheet("font-size: 14px;");
-            ui->commentator->setText("Oh no! I should've know that!");
-            ui->lettershower->hide();
-             ui->password->hide();
-        }
-        ui->table->setText(generatedword);
-        ui->table->setAlignment(Qt::AlignCenter);
-    }
-    else if(listofwords.size()<10)
-    {
-        wordlisthaslessthantenelements=true;
     }
 }
 
