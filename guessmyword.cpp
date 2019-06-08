@@ -37,6 +37,7 @@ Guessmyword::Guessmyword(QWidget *parent) :
 void Guessmyword::on_startquitbutton_clicked()
 {
   addwordstolist();
+
     if(gamecounter==0)
     {
        ui->table->setStyleSheet("font-size: 40px; color:black; border: 1px solid blue; background-color: #42f4c8;");
@@ -365,10 +366,11 @@ void Guessmyword::computerguesses()
                  {
                      if(listofwords.at(0)[k] == guessedletters[j])
                         {
-                             j=0;
+                             j = -1;
                              k++;
-                             if(k==listofwords[0].size()) k=0;
+                             if(k==listofwords[0].size()) break;
                         }
+
                  }
                  randchar=listofwords[0][k];
                  setuiforpc(randchar);
@@ -440,10 +442,9 @@ void Guessmyword::makewordlistshorter(QString s1)
     {
         for(int i=0;i<listofwords.size();i++)
         {
-            QString currentword=listofwords[i];
-            for(int j=0;j<currentword.length();j++)
+            for(int j=0;j<listofwords[i].length();j++)
                {
-                    if(currentword.at(j)==s1)
+                    if(listofwords[i].at(j)==s1)
                     {
                         listofwords.erase(listofwords.begin()+i);
                         i=-1;
@@ -764,2311 +765,1333 @@ void Guessmyword::on_hardlevel_clicked()
 
 void Guessmyword::debugger()
 {
+
     qDebug()<<listofwords.size()/2;
+
 }
 
 void Guessmyword::addwordstolist()
 {
     srand((static_cast<unsigned int>(time(nullptr))));
 
-     char words[2290][20] {"abandon" ,
-                           "ability" ,
-                           "abortion" ,
-                           "about" ,
-                           "above" ,
-                           "abroad" ,
-                           "absence" ,
-                           "absolute" ,
-                           "absolutely" ,
-                           "absorb" ,
-                           "abuse" ,
-                           "academic" ,
-                           "accept" ,
-                           "access" ,
-                           "accident" ,
-                           "accompany" ,
-                           "accomplish" ,
-                           "according" ,
-                           "account" ,
-                           "accurate" ,
-                           "accuse" ,
-                           "achieve" ,
-                           "achievement" ,
-                           "acknowledge" ,
-                           "acquire" ,
-                           "across" ,
-                           "action" ,
-                           "active" ,
-                           "activist" ,
-                           "activity" ,
-                           "actor" ,
-                           "actress" ,
-                           "actual" ,
-                           "actually" ,
-                           "adapt" ,
-                           "addition" ,
-                           "additional" ,
-                           "address" ,
-                           "adequate" ,
-                           "adjust" ,
-                           "adjustment" ,
-                           "administration" ,
-                           "administrator" ,
-                           "admire" ,
-                           "admission" ,
-                           "admit" ,
-                           "adolescent" ,
-                           "adopt" ,
-                           "adult" ,
-                           "advance" ,
-                           "advanced" ,
-                           "advantage" ,
-                           "adventure" ,
-                           "advertising" ,
-                           "advice" ,
-                           "advise" ,
-                           "adviser" ,
-                           "advocate" ,
-                           "affair" ,
-                           "affect" ,
-                           "afford" ,
-                           "afraid" ,
-                           "African" ,
-                           "African-American" ,
-                           "after" ,
-                           "afternoon" ,
-                           "again" ,
-                           "against" ,
-                           "agency" ,
-                           "agenda" ,
-                           "agent" ,
-                           "aggressive" ,
-                           "agree" ,
-                           "agreement" ,
-                           "agricultural" ,
-                           "ahead" ,
-                           "aircraft" ,
-                           "airline" ,
-                           "airport" ,
-                           "album" ,
-                           "alcohol" ,
-                           "alive" ,
-                           "alliance" ,
-                           "allow" ,
-                           "almost" ,
-                           "alone" ,
-                           "along" ,
-                           "already" ,
-                           "alter" ,
-                           "alternative" ,
-                           "although" ,
-                           "always" ,
-                           "amazing" ,
-                           "American" ,
-                           "among" ,
-                           "amount" ,
-                           "analysis" ,
-                           "analyst" ,
-                           "analyze" ,
-                           "ancient" ,
-                           "anger" ,
-                           "angle" ,
-                           "angry" ,
-                           "animal" ,
-                           "anniversary" ,
-                           "announce" ,
-                           "annual" ,
-                           "another" ,
-                           "answer" ,
-                           "anticipate" ,
-                           "anxiety" ,
-                           "anybody" ,
-                           "anymore" ,
-                           "anyone" ,
-                           "anything" ,
-                           "anyway" ,
-                           "anywhere" ,
-                           "apart" ,
-                           "apartment" ,
-                           "apparent" ,
-                           "apparently" ,
-                           "appeal" ,
-                           "appear" ,
-                           "appearance" ,
-                           "apple" ,
-                           "application" ,
-                           "apply" ,
-                           "appoint" ,
-                           "appointment" ,
-                           "appreciate" ,
-                           "approach" ,
-                           "appropriate" ,
-                           "approval" ,
-                           "approve" ,
-                           "approximately" ,
-                           "architect" ,
-                           "argue" ,
-                           "argument" ,
-                           "arise" ,
-                           "armed" ,
-                           "around" ,
-                           "arrange" ,
-                           "arrangement" ,
-                           "arrest" ,
-                           "arrival" ,
-                           "arrive" ,
-                           "article" ,
-                           "artist" ,
-                           "artistic" ,
-                           "Asian" ,
-                           "aside" ,
-                           "asleep" ,
-                           "aspect" ,
-                           "assault" ,
-                           "assert" ,
-                           "assess" ,
-                           "assessment" ,
-                           "asset" ,
-                           "assign" ,
-                           "assignment" ,
-                           "assist" ,
-                           "assistance" ,
-                           "assistant" ,
-                           "associate" ,
-                           "association" ,
-                           "assume" ,
-                           "assumption" ,
-                           "assure" ,
-                           "athlete" ,
-                           "athletic" ,
-                           "atmosphere" ,
-                           "attach" ,
-                           "attack" ,
-                           "attempt" ,
-                           "attend" ,
-                           "attention" ,
-                           "attitude" ,
-                           "attorney" ,
-                           "attract" ,
-                           "attractive" ,
-                           "attribute" ,
-                           "audience" ,
-                           "author" ,
-                           "authority" ,
-                           "available" ,
-                           "average" ,
-                           "avoid" ,
-                           "award" ,
-                           "aware" ,
-                           "awareness" ,
-                           "awful" ,
-                           "background" ,
-                           "badly" ,
-                           "balance" ,
-                           "barely" ,
-                           "barrel" ,
-                           "barrier" ,
-                           "baseball" ,
-                           "basic" ,
-                           "basically" ,
-                           "basis" ,
-                           "basket" ,
-                           "basketball" ,
-                           "bathroom" ,
-                           "battery" ,
-                           "battle" ,
-                           "beach" ,
-                           "beautiful" ,
-                           "beauty" ,
-                           "because" ,
-                           "become" ,
-                           "bedroom" ,
-                           "before" ,
-                           "begin" ,
-                           "beginning" ,
-                           "behavior" ,
-                           "behind" ,
-                           "being" ,
-                           "belief" ,
-                           "believe" ,
-                           "belong" ,
-                           "below" ,
-                           "bench" ,
-                           "beneath" ,
-                           "benefit" ,
-                           "beside" ,
-                           "besides" ,
-                           "better" ,
-                           "between" ,
-                           "beyond" ,
-                           "Bible" ,
-                           "billion" ,
-                           "biological" ,
-                           "birth" ,
-                           "birthday" ,
-                           "black" ,
-                           "blade" ,
-                           "blame" ,
-                           "blanket" ,
-                           "blind" ,
-                           "block" ,
-                           "blood" ,
-                           "board" ,
-                           "bombing" ,
-                           "border" ,
-                           "borrow" ,
-                           "bother" ,
-                           "bottle" ,
-                           "bottom" ,
-                           "boundary" ,
-                           "boyfriend" ,
-                           "brain" ,
-                           "branch" ,
-                           "brand" ,
-                           "bread" ,
-                           "break" ,
-                           "breakfast" ,
-                           "breast" ,
-                           "breath" ,
-                           "breathe" ,
-                           "brick" ,
-                           "bridge" ,
-                           "brief" ,
-                           "briefly" ,
-                           "bright" ,
-                           "brilliant" ,
-                           "bring" ,
-                           "British" ,
-                           "broad" ,
-                           "broken" ,
-                           "brother" ,
-                           "brown" ,
-                           "brush" ,
-                           "budget" ,
-                           "build" ,
-                           "building" ,
-                           "bullet" ,
-                           "bunch" ,
-                           "burden" ,
-                           "business" ,
-                           "butter" ,
-                           "button" ,
-                           "buyer" ,
-                           "cabin" ,
-                           "cabinet" ,
-                           "cable" ,
-                           "calculate" ,
-                           "camera" ,
-                           "campaign" ,
-                           "campus" ,
-                           "Canadian" ,
-                           "cancer" ,
-                           "candidate" ,
-                           "capability" ,
-                           "capable" ,
-                           "capacity" ,
-                           "capital" ,
-                           "captain" ,
-                           "capture" ,
-                           "carbon" ,
-                           "career" ,
-                           "careful" ,
-                           "carefully" ,
-                           "carrier" ,
-                           "carry" ,
-                           "catch" ,
-                           "category" ,
-                           "Catholic" ,
-                           "cause" ,
-                           "ceiling" ,
-                           "celebrate" ,
-                           "celebration" ,
-                           "celebrity" ,
-                           "center" ,
-                           "central" ,
-                           "century" ,
-                           "ceremony" ,
-                           "certain" ,
-                           "certainly" ,
-                           "chain" ,
-                           "chair" ,
-                           "chairman" ,
-                           "challenge" ,
-                           "chamber" ,
-                           "champion" ,
-                           "championship" ,
-                           "chance" ,
-                           "change" ,
-                           "changing" ,
-                           "channel" ,
-                           "chapter" ,
-                           "character" ,
-                           "characteristic" ,
-                           "characterize" ,
-                           "charge" ,
-                           "charity" ,
-                           "chart" ,
-                           "chase" ,
-                           "cheap" ,
-                           "check" ,
-                           "cheek" ,
-                           "cheese" ,
-                           "chemical" ,
-                           "chest" ,
-                           "chicken" ,
-                           "chief" ,
-                           "child" ,
-                           "childhood" ,
-                           "Chinese" ,
-                           "chocolate" ,
-                           "choice" ,
-                           "cholesterol" ,
-                           "choose" ,
-                           "Christian" ,
-                           "Christmas" ,
-                           "church" ,
-                           "cigarette" ,
-                           "circle" ,
-                           "circumstance" ,
-                           "citizen" ,
-                           "civil" ,
-                           "civilian" ,
-                           "claim" ,
-                           "class" ,
-                           "classic" ,
-                           "classroom" ,
-                           "clean" ,
-                           "clear" ,
-                           "clearly" ,
-                           "client" ,
-                           "climate" ,
-                           "climb" ,
-                           "clinic" ,
-                           "clinical" ,
-                           "clock" ,
-                           "close" ,
-                           "closely" ,
-                           "closer" ,
-                           "clothes" ,
-                           "clothing" ,
-                           "cloud" ,
-                           "cluster" ,
-                           "coach" ,
-                           "coalition" ,
-                           "coast" ,
-                           "coffee" ,
-                           "cognitive" ,
-                           "collapse" ,
-                           "colleague" ,
-                           "collect" ,
-                           "collection" ,
-                           "collective" ,
-                           "college" ,
-                           "colonial" ,
-                           "color" ,
-                           "column" ,
-                           "combination" ,
-                           "combine" ,
-                           "comedy" ,
-                           "comfort" ,
-                           "comfortable" ,
-                           "command" ,
-                           "commander" ,
-                           "comment" ,
-                           "commercial" ,
-                           "commission" ,
-                           "commit" ,
-                           "commitment" ,
-                           "committee" ,
-                           "common" ,
-                           "communicate" ,
-                           "communication" ,
-                           "community" ,
-                           "company" ,
-                           "compare" ,
-                           "comparison" ,
-                           "compete" ,
-                           "competition" ,
-                           "competitive" ,
-                           "competitor" ,
-                           "complain" ,
-                           "complaint" ,
-                           "complete" ,
-                           "completely" ,
-                           "complex" ,
-                           "complicated" ,
-                           "component" ,
-                           "compose" ,
-                           "composition" ,
-                           "comprehensive" ,
-                           "computer" ,
-                           "concentrate" ,
-                           "concentration" ,
-                           "concept" ,
-                           "concern" ,
-                           "concerned" ,
-                           "concert" ,
-                           "conclude" ,
-                           "conclusion" ,
-                           "concrete" ,
-                           "condition" ,
-                           "conduct" ,
-                           "conference" ,
-                           "confidence" ,
-                           "confident" ,
-                           "confirm" ,
-                           "conflict" ,
-                           "confront" ,
-                           "confusion" ,
-                           "Congress" ,
-                           "congressional" ,
-                           "connect" ,
-                           "connection" ,
-                           "consciousness" ,
-                           "consensus" ,
-                           "consequence" ,
-                           "conservative" ,
-                           "consider" ,
-                           "considerable" ,
-                           "consideration" ,
-                           "consist" ,
-                           "consistent" ,
-                           "constant" ,
-                           "constantly" ,
-                           "constitute" ,
-                           "constitutional" ,
-                           "construct" ,
-                           "construction" ,
-                           "consultant" ,
-                           "consume" ,
-                           "consumer" ,
-                           "consumption" ,
-                           "contact" ,
-                           "contain" ,
-                           "container" ,
-                           "contemporary" ,
-                           "content" ,
-                           "contest" ,
-                           "context" ,
-                           "continue" ,
-                           "continued" ,
-                           "contract" ,
-                           "contrast" ,
-                           "contribute" ,
-                           "contribution" ,
-                           "control" ,
-                           "controversial" ,
-                           "controversy" ,
-                           "convention" ,
-                           "conventional" ,
-                           "conversation" ,
-                           "convert" ,
-                           "conviction" ,
-                           "convince" ,
-                           "cookie" ,
-                           "cooking" ,
-                           "cooperation" ,
-                           "corner" ,
-                           "corporate" ,
-                           "corporation" ,
-                           "correct" ,
-                           "correspondent" ,
-                           "cotton" ,
-                           "couch" ,
-                           "could" ,
-                           "council" ,
-                           "counselor" ,
-                           "count" ,
-                           "counter" ,
-                           "country" ,
-                           "county" ,
-                           "couple" ,
-                           "courage" ,
-                           "course" ,
-                           "court" ,
-                           "cousin" ,
-                           "cover" ,
-                           "coverage" ,
-                           "crack" ,
-                           "craft" ,
-                           "crash" ,
-                           "crazy" ,
-                           "cream" ,
-                           "create" ,
-                           "creation" ,
-                           "creative" ,
-                           "creature" ,
-                           "credit" ,
-                           "crime" ,
-                           "criminal" ,
-                           "crisis" ,
-                           "criteria" ,
-                           "critic" ,
-                           "critical" ,
-                           "criticism" ,
-                           "criticize" ,
-                           "cross" ,
-                           "crowd" ,
-                           "crucial" ,
-                           "cultural" ,
-                           "culture" ,
-                           "curious" ,
-                           "current" ,
-                           "currently" ,
-                           "curriculum" ,
-                           "custom" ,
-                           "customer" ,
-                           "cycle" ,
-                           "daily" ,
-                           "damage" ,
-                           "dance" ,
-                           "danger" ,
-                           "dangerous" ,
-                           "darkness" ,
-                           "daughter" ,
-                           "dealer" ,
-                           "death" ,
-                           "debate" ,
-                           "decade" ,
-                           "decide" ,
-                           "decision" ,
-                           "declare" ,
-                           "decline" ,
-                           "decrease" ,
-                           "deeply" ,
-                           "defeat" ,
-                           "defend" ,
-                           "defendant" ,
-                           "defense" ,
-                           "defensive" ,
-                           "deficit" ,
-                           "define" ,
-                           "definitely" ,
-                           "definition" ,
-                           "degree" ,
-                           "delay" ,
-                           "deliver" ,
-                           "delivery" ,
-                           "demand" ,
-                           "democracy" ,
-                           "Democrat" ,
-                           "democratic" ,
-                           "demonstrate" ,
-                           "demonstration" ,
-                           "department" ,
-                           "depend" ,
-                           "dependent" ,
-                           "depending" ,
-                           "depict" ,
-                           "depression" ,
-                           "depth" ,
-                           "deputy" ,
-                           "derive" ,
-                           "describe" ,
-                           "description" ,
-                           "desert" ,
-                           "deserve" ,
-                           "design" ,
-                           "designer" ,
-                           "desire" ,
-                           "desperate" ,
-                           "despite" ,
-                           "destroy" ,
-                           "destruction" ,
-                           "detail" ,
-                           "detailed" ,
-                           "detect" ,
-                           "determine" ,
-                           "develop" ,
-                           "developing" ,
-                           "development" ,
-                           "device" ,
-                           "devote" ,
-                           "dialogue" ,
-                           "differ" ,
-                           "difference" ,
-                           "different" ,
-                           "differently" ,
-                           "difficult" ,
-                           "difficulty" ,
-                           "digital" ,
-                           "dimension" ,
-                           "dining" ,
-                           "dinner" ,
-                           "direct" ,
-                           "direction" ,
-                           "directly" ,
-                           "director" ,
-                           "dirty" ,
-                           "disability" ,
-                           "disagree" ,
-                           "disappear" ,
-                           "disaster" ,
-                           "discipline" ,
-                           "discourse" ,
-                           "discover" ,
-                           "discovery" ,
-                           "discrimination" ,
-                           "discuss" ,
-                           "discussion" ,
-                           "disease" ,
-                           "dismiss" ,
-                           "disorder" ,
-                           "display" ,
-                           "dispute" ,
-                           "distance" ,
-                           "distant" ,
-                           "distinct" ,
-                           "distinction" ,
-                           "distinguish" ,
-                           "distribute" ,
-                           "distribution" ,
-                           "district" ,
-                           "diverse" ,
-                           "diversity" ,
-                           "divide" ,
-                           "division" ,
-                           "divorce" ,
-                           "doctor" ,
-                           "document" ,
-                           "domestic" ,
-                           "dominant" ,
-                           "dominate" ,
-                           "double" ,
-                           "doubt" ,
-                           "downtown" ,
-                           "dozen" ,
-                           "draft" ,
-                           "drama" ,
-                           "dramatic" ,
-                           "dramatically" ,
-                           "drawing" ,
-                           "dream" ,
-                           "dress" ,
-                           "drink" ,
-                           "drive" ,
-                           "driver" ,
-                           "during" ,
-                           "eager" ,
-                           "early" ,
-                           "earnings" ,
-                           "earth" ,
-                           "easily" ,
-                           "eastern" ,
-                           "economic" ,
-                           "economics" ,
-                           "economist" ,
-                           "economy" ,
-                           "edition" ,
-                           "editor" ,
-                           "educate" ,
-                           "education" ,
-                           "educational" ,
-                           "educator" ,
-                           "effect" ,
-                           "effective" ,
-                           "effectively" ,
-                           "efficiency" ,
-                           "efficient" ,
-                           "effort" ,
-                           "eight" ,
-                           "either" ,
-                           "elderly" ,
-                           "elect" ,
-                           "election" ,
-                           "electric" ,
-                           "electricity" ,
-                           "electronic" ,
-                           "element" ,
-                           "elementary" ,
-                           "eliminate" ,
-                           "elite" ,
-                           "elsewhere" ,
-                           "e-mail" ,
-                           "embrace" ,
-                           "emerge" ,
-                           "emergency" ,
-                           "emission" ,
-                           "emotion" ,
-                           "emotional" ,
-                           "emphasis" ,
-                           "emphasize" ,
-                           "employ" ,
-                           "employee" ,
-                           "employer" ,
-                           "employment" ,
-                           "empty" ,
-                           "enable" ,
-                           "encounter" ,
-                           "encourage" ,
-                           "enemy" ,
-                           "energy" ,
-                           "enforcement" ,
-                           "engage" ,
-                           "engine" ,
-                           "engineer" ,
-                           "engineering" ,
-                           "English" ,
-                           "enhance" ,
-                           "enjoy" ,
-                           "enormous" ,
-                           "enough" ,
-                           "ensure" ,
-                           "enter" ,
-                           "enterprise" ,
-                           "entertainment" ,
-                           "entire" ,
-                           "entirely" ,
-                           "entrance" ,
-                           "entry" ,
-                           "environment" ,
-                           "environmental" ,
-                           "episode" ,
-                           "equal" ,
-                           "equally" ,
-                           "equipment" ,
-                           "error" ,
-                           "escape" ,
-                           "especially" ,
-                           "essay" ,
-                           "essential" ,
-                           "essentially" ,
-                           "establish" ,
-                           "establishment" ,
-                           "estate" ,
-                           "estimate" ,
-                           "ethics" ,
-                           "ethnic" ,
-                           "European" ,
-                           "evaluate" ,
-                           "evaluation" ,
-                           "evening" ,
-                           "event" ,
-                           "eventually" ,
-                           "every" ,
-                           "everybody" ,
-                           "everyday" ,
-                           "everyone" ,
-                           "everything" ,
-                           "everywhere" ,
-                           "evidence" ,
-                           "evolution" ,
-                           "evolve" ,
-                           "exact" ,
-                           "exactly" ,
-                           "examination" ,
-                           "examine" ,
-                           "example" ,
-                           "exceed" ,
-                           "excellent" ,
-                           "except" ,
-                           "exception" ,
-                           "exchange" ,
-                           "exciting" ,
-                           "executive" ,
-                           "exercise" ,
-                           "exhibit" ,
-                           "exhibition" ,
-                           "exist" ,
-                           "existence" ,
-                           "existing" ,
-                           "expand" ,
-                           "expansion" ,
-                           "expect" ,
-                           "expectation" ,
-                           "expense" ,
-                           "expensive" ,
-                           "experience" ,
-                           "experiment" ,
-                           "expert" ,
-                           "explain" ,
-                           "explanation" ,
-                           "explode" ,
-                           "explore" ,
-                           "explosion" ,
-                           "expose" ,
-                           "exposure" ,
-                           "express" ,
-                           "expression" ,
-                           "extend" ,
-                           "extension" ,
-                           "extensive" ,
-                           "extent" ,
-                           "external" ,
-                           "extra" ,
-                           "extraordinary" ,
-                           "extreme" ,
-                           "extremely" ,
-                           "fabric" ,
-                           "facility" ,
-                           "factor" ,
-                           "factory" ,
-                           "faculty" ,
-                           "failure" ,
-                           "fairly" ,
-                           "faith" ,
-                           "false" ,
-                           "familiar" ,
-                           "family" ,
-                           "famous" ,
-                           "fantasy" ,
-                           "farmer" ,
-                           "fashion" ,
-                           "father" ,
-                           "fault" ,
-                           "favor" ,
-                           "favorite" ,
-                           "feature" ,
-                           "federal" ,
-                           "feeling" ,
-                           "fellow" ,
-                           "female" ,
-                           "fence" ,
-                           "fewer" ,
-                           "fiber" ,
-                           "fiction" ,
-                           "field" ,
-                           "fifteen" ,
-                           "fifth" ,
-                           "fifty" ,
-                           "fight" ,
-                           "fighter" ,
-                           "fighting" ,
-                           "figure" ,
-                           "final" ,
-                           "finally" ,
-                           "finance" ,
-                           "financial" ,
-                           "finding" ,
-                           "finger" ,
-                           "finish" ,
-                           "first" ,
-                           "fishing" ,
-                           "fitness" ,
-                           "flame" ,
-                           "flavor" ,
-                           "flesh" ,
-                           "flight" ,
-                           "float" ,
-                           "floor" ,
-                           "flower" ,
-                           "focus" ,
-                           "follow" ,
-                           "following" ,
-                           "football" ,
-                           "force" ,
-                           "foreign" ,
-                           "forest" ,
-                           "forever" ,
-                           "forget" ,
-                           "formal" ,
-                           "formation" ,
-                           "former" ,
-                           "formula" ,
-                           "forth" ,
-                           "fortune" ,
-                           "forward" ,
-                           "found" ,
-                           "foundation" ,
-                           "founder" ,
-                           "fourth" ,
-                           "frame" ,
-                           "framework" ,
-                           "freedom" ,
-                           "freeze" ,
-                           "French" ,
-                           "frequency" ,
-                           "frequent" ,
-                           "frequently" ,
-                           "fresh" ,
-                           "friend" ,
-                           "friendly" ,
-                           "friendship" ,
-                           "front" ,
-                           "fruit" ,
-                           "frustration" ,
-                           "fully" ,
-                           "function" ,
-                           "fundamental" ,
-                           "funding" ,
-                           "funeral" ,
-                           "funny" ,
-                           "furniture" ,
-                           "furthermore" ,
-                           "future" ,
-                           "galaxy" ,
-                           "gallery" ,
-                           "garage" ,
-                           "garden" ,
-                           "garlic" ,
-                           "gather" ,
-                           "gender" ,
-                           "general" ,
-                           "generally" ,
-                           "generate" ,
-                           "generation" ,
-                           "genetic" ,
-                           "gentleman" ,
-                           "gently" ,
-                           "German" ,
-                           "gesture" ,
-                           "ghost" ,
-                           "giant" ,
-                           "gifted" ,
-                           "girlfriend" ,
-                           "given" ,
-                           "glance" ,
-                           "glass" ,
-                           "global" ,
-                           "glove" ,
-                           "golden" ,
-                           "government" ,
-                           "governor" ,
-                           "grade" ,
-                           "gradually" ,
-                           "graduate" ,
-                           "grain" ,
-                           "grand" ,
-                           "grandfather" ,
-                           "grandmother" ,
-                           "grant" ,
-                           "grass" ,
-                           "grave" ,
-                           "great" ,
-                           "greatest" ,
-                           "green" ,
-                           "grocery" ,
-                           "ground" ,
-                           "group" ,
-                           "growing" ,
-                           "growth" ,
-                           "guarantee" ,
-                           "guard" ,
-                           "guess" ,
-                           "guest" ,
-                           "guide" ,
-                           "guideline" ,
-                           "guilty" ,
-                           "habit" ,
-                           "habitat" ,
-                           "handful" ,
-                           "handle" ,
-                           "happen" ,
-                           "happy" ,
-                           "hardly" ,
-                           "headline" ,
-                           "headquarters" ,
-                           "health" ,
-                           "healthy" ,
-                           "hearing" ,
-                           "heart" ,
-                           "heaven" ,
-                           "heavily" ,
-                           "heavy" ,
-                           "height" ,
-                           "helicopter" ,
-                           "hello" ,
-                           "helpful" ,
-                           "heritage" ,
-                           "herself" ,
-                           "highlight" ,
-                           "highly" ,
-                           "highway" ,
-                           "himself" ,
-                           "historian" ,
-                           "historic" ,
-                           "historical" ,
-                           "history" ,
-                           "holiday" ,
-                           "homeless" ,
-                           "honest" ,
-                           "honey" ,
-                           "honor" ,
-                           "horizon" ,
-                           "horror" ,
-                           "horse" ,
-                           "hospital" ,
-                           "hotel" ,
-                           "house" ,
-                           "household" ,
-                           "housing" ,
-                           "however" ,
-                           "human" ,
-                           "humor" ,
-                           "hundred" ,
-                           "hungry" ,
-                           "hunter" ,
-                           "hunting" ,
-                           "husband" ,
-                           "hypothesis" ,
-                           "ideal" ,
-                           "identification" ,
-                           "identify" ,
-                           "identity" ,
-                           "ignore" ,
-                           "illegal" ,
-                           "illness" ,
-                           "illustrate" ,
-                           "image" ,
-                           "imagination" ,
-                           "imagine" ,
-                           "immediate" ,
-                           "immediately" ,
-                           "immigrant" ,
-                           "immigration" ,
-                           "impact" ,
-                           "implement" ,
-                           "implication" ,
-                           "imply" ,
-                           "importance" ,
-                           "important" ,
-                           "impose" ,
-                           "impossible" ,
-                           "impress" ,
-                           "impression" ,
-                           "impressive" ,
-                           "improve" ,
-                           "improvement" ,
-                           "incentive" ,
-                           "incident" ,
-                           "include" ,
-                           "including" ,
-                           "income" ,
-                           "incorporate" ,
-                           "increase" ,
-                           "increased" ,
-                           "increasing" ,
-                           "increasingly" ,
-                           "incredible" ,
-                           "indeed" ,
-                           "independence" ,
-                           "independent" ,
-                           "index" ,
-                           "Indian" ,
-                           "indicate" ,
-                           "indication" ,
-                           "individual" ,
-                           "industrial" ,
-                           "industry" ,
-                           "infant" ,
-                           "infection" ,
-                           "inflation" ,
-                           "influence" ,
-                           "inform" ,
-                           "information" ,
-                           "ingredient" ,
-                           "initial" ,
-                           "initially" ,
-                           "initiative" ,
-                           "injury" ,
-                           "inner" ,
-                           "innocent" ,
-                           "inquiry" ,
-                           "inside" ,
-                           "insight" ,
-                           "insist" ,
-                           "inspire" ,
-                           "install" ,
-                           "instance" ,
-                           "instead" ,
-                           "institution" ,
-                           "institutional" ,
-                           "instruction" ,
-                           "instructor" ,
-                           "instrument" ,
-                           "insurance" ,
-                           "intellectual" ,
-                           "intelligence" ,
-                           "intend" ,
-                           "intense" ,
-                           "intensity" ,
-                           "intention" ,
-                           "interaction" ,
-                           "interest" ,
-                           "interested" ,
-                           "interesting" ,
-                           "internal" ,
-                           "international" ,
-                           "Internet" ,
-                           "interpret" ,
-                           "interpretation" ,
-                           "intervention" ,
-                           "interview" ,
-                           "introduce" ,
-                           "introduction" ,
-                           "invasion" ,
-                           "invest" ,
-                           "investigate" ,
-                           "investigation" ,
-                           "investigator" ,
-                           "investment" ,
-                           "investor" ,
-                           "invite" ,
-                           "involve" ,
-                           "involved" ,
-                           "involvement" ,
-                           "Iraqi" ,
-                           "Irish" ,
-                           "Islamic" ,
-                           "island" ,
-                           "Israeli" ,
-                           "issue" ,
-                           "Italian" ,
-                           "itself" ,
-                           "jacket" ,
-                           "Japanese" ,
-                           "Jewish" ,
-                           "joint" ,
-                           "journal" ,
-                           "journalist" ,
-                           "journey" ,
-                           "judge" ,
-                           "judgment" ,
-                           "juice" ,
-                           "junior" ,
-                           "justice" ,
-                           "justify" ,
-                           "killer" ,
-                           "killing" ,
-                           "kitchen" ,
-                           "knife" ,
-                           "knock" ,
-                           "knowledge" ,
-                           "label" ,
-                           "labor" ,
-                           "laboratory" ,
-                           "landscape" ,
-                           "language" ,
-                           "large" ,
-                           "largely" ,
-                           "later" ,
-                           "Latin" ,
-                           "latter" ,
-                           "laugh" ,
-                           "launch" ,
-                           "lawsuit" ,
-                           "lawyer" ,
-                           "layer" ,
-                           "leader" ,
-                           "leadership" ,
-                           "leading" ,
-                           "league" ,
-                           "learn" ,
-                           "learning" ,
-                           "least" ,
-                           "leather" ,
-                           "leave" ,
-                           "legacy" ,
-                           "legal" ,
-                           "legend" ,
-                           "legislation" ,
-                           "legitimate" ,
-                           "lemon" ,
-                           "length" ,
-                           "lesson" ,
-                           "letter" ,
-                           "level" ,
-                           "liberal" ,
-                           "library" ,
-                           "license" ,
-                           "lifestyle" ,
-                           "lifetime" ,
-                           "light" ,
-                           "likely" ,
-                           "limit" ,
-                           "limitation" ,
-                           "limited" ,
-                           "listen" ,
-                           "literally" ,
-                           "literary" ,
-                           "literature" ,
-                           "little" ,
-                           "living" ,
-                           "local" ,
-                           "locate" ,
-                           "location" ,
-                           "long-term" ,
-                           "loose" ,
-                           "lovely" ,
-                           "lover" ,
-                           "lower" ,
-                           "lucky" ,
-                           "lunch" ,
-                           "machine" ,
-                           "magazine" ,
-                           "mainly" ,
-                           "maintain" ,
-                           "maintenance" ,
-                           "major" ,
-                           "majority" ,
-                           "maker" ,
-                           "makeup" ,
-                           "manage" ,
-                           "management" ,
-                           "manager" ,
-                           "manner" ,
-                           "manufacturer" ,
-                           "manufacturing" ,
-                           "margin" ,
-                           "market" ,
-                           "marketing" ,
-                           "marriage" ,
-                           "married" ,
-                           "marry" ,
-                           "massive" ,
-                           "master" ,
-                           "match" ,
-                           "material" ,
-                           "matter" ,
-                           "maybe" ,
-                           "mayor" ,
-                           "meaning" ,
-                           "meanwhile" ,
-                           "measure" ,
-                           "measurement" ,
-                           "mechanism" ,
-                           "media" ,
-                           "medical" ,
-                           "medication" ,
-                           "medicine" ,
-                           "medium" ,
-                           "meeting" ,
-                           "member" ,
-                           "membership" ,
-                           "memory" ,
-                           "mental" ,
-                           "mention" ,
-                           "merely" ,
-                           "message" ,
-                           "metal" ,
-                           "meter" ,
-                           "method" ,
-                           "Mexican" ,
-                           "middle" ,
-                           "might" ,
-                           "military" ,
-                           "million" ,
-                           "minister" ,
-                           "minor" ,
-                           "minority" ,
-                           "minute" ,
-                           "miracle" ,
-                           "mirror" ,
-                           "missile" ,
-                           "mission" ,
-                           "mistake" ,
-                           "mixture" ,
-                           "mm-hmm" ,
-                           "model" ,
-                           "moderate" ,
-                           "modern" ,
-                           "modest" ,
-                           "moment" ,
-                           "money" ,
-                           "monitor" ,
-                           "month" ,
-                           "moral" ,
-                           "moreover" ,
-                           "morning" ,
-                           "mortgage" ,
-                           "mostly" ,
-                           "mother" ,
-                           "motion" ,
-                           "motivation" ,
-                           "motor" ,
-                           "mount" ,
-                           "mountain" ,
-                           "mouse" ,
-                           "mouth" ,
-                           "movement" ,
-                           "movie" ,
-                           "multiple" ,
-                           "murder" ,
-                           "muscle" ,
-                           "museum" ,
-                           "music" ,
-                           "musical" ,
-                           "musician" ,
-                           "Muslim" ,
-                           "mutual" ,
-                           "myself" ,
-                           "mystery" ,
-                           "naked" ,
-                           "narrative" ,
-                           "narrow" ,
-                           "nation" ,
-                           "national" ,
-                           "native" ,
-                           "natural" ,
-                           "naturally" ,
-                           "nature" ,
-                           "nearby" ,
-                           "nearly" ,
-                           "necessarily" ,
-                           "necessary" ,
-                           "negative" ,
-                           "negotiate" ,
-                           "negotiation" ,
-                           "neighbor" ,
-                           "neighborhood" ,
-                           "neither" ,
-                           "nerve" ,
-                           "nervous" ,
-                           "network" ,
-                           "never" ,
-                           "nevertheless" ,
-                           "newly" ,
-                           "newspaper" ,
-                           "night" ,
-                           "nobody" ,
-                           "noise" ,
-                           "nomination" ,
-                           "nonetheless" ,
-                           "normal" ,
-                           "normally" ,
-                           "north" ,
-                           "northern" ,
-                           "nothing" ,
-                           "notice" ,
-                           "notion" ,
-                           "novel" ,
-                           "nowhere" ,
-                           "nuclear" ,
-                           "number" ,
-                           "numerous" ,
-                           "nurse" ,
-                           "object" ,
-                           "objective" ,
-                           "obligation" ,
-                           "observation" ,
-                           "observe" ,
-                           "observer" ,
-                           "obtain" ,
-                           "obvious" ,
-                           "obviously" ,
-                           "occasion" ,
-                           "occasionally" ,
-                           "occupation" ,
-                           "occupy" ,
-                           "occur" ,
-                           "ocean" ,
-                           "offense" ,
-                           "offensive" ,
-                           "offer" ,
-                           "office" ,
-                           "officer" ,
-                           "official" ,
-                           "often" ,
-                           "Olympic" ,
-                           "ongoing" ,
-                           "onion" ,
-                           "online" ,
-                           "opening" ,
-                           "operate" ,
-                           "operating" ,
-                           "operation" ,
-                           "operator" ,
-                           "opinion" ,
-                           "opponent" ,
-                           "opportunity" ,
-                           "oppose" ,
-                           "opposite" ,
-                           "opposition" ,
-                           "option" ,
-                           "orange" ,
-                           "order" ,
-                           "ordinary" ,
-                           "organic" ,
-                           "organization" ,
-                           "organize" ,
-                           "orientation" ,
-                           "origin" ,
-                           "original" ,
-                           "originally" ,
-                           "other" ,
-                           "others" ,
-                           "otherwise" ,
-                           "ought" ,
-                           "ourselves" ,
-                           "outcome" ,
-                           "outside" ,
-                           "overall" ,
-                           "overcome" ,
-                           "overlook" ,
-                           "owner" ,
-                           "package" ,
-                           "painful" ,
-                           "paint" ,
-                           "painter" ,
-                           "painting" ,
-                           "Palestinian" ,
-                           "panel" ,
-                           "paper" ,
-                           "parent" ,
-                           "parking" ,
-                           "participant" ,
-                           "participate" ,
-                           "participation" ,
-                           "particular" ,
-                           "particularly" ,
-                           "partly" ,
-                           "partner" ,
-                           "partnership" ,
-                           "party" ,
-                           "passage" ,
-                           "passenger" ,
-                           "passion" ,
-                           "patch" ,
-                           "patient" ,
-                           "pattern" ,
-                           "pause" ,
-                           "payment" ,
-                           "peace" ,
-                           "penalty" ,
-                           "people" ,
-                           "pepper" ,
-                           "perceive" ,
-                           "percentage" ,
-                           "perception" ,
-                           "perfect" ,
-                           "perfectly" ,
-                           "perform" ,
-                           "performance" ,
-                           "perhaps" ,
-                           "period" ,
-                           "permanent" ,
-                           "permission" ,
-                           "permit" ,
-                           "person" ,
-                           "personal" ,
-                           "personality" ,
-                           "personally" ,
-                           "personnel" ,
-                           "perspective" ,
-                           "persuade" ,
-                           "phase" ,
-                           "phenomenon" ,
-                           "philosophy" ,
-                           "phone" ,
-                           "photo" ,
-                           "photograph" ,
-                           "photographer" ,
-                           "phrase" ,
-                           "physical" ,
-                           "physically" ,
-                           "physician" ,
-                           "piano" ,
-                           "picture" ,
-                           "piece" ,
-                           "pilot" ,
-                           "pitch" ,
-                           "place" ,
-                           "plane" ,
-                           "planet" ,
-                           "planning" ,
-                           "plant" ,
-                           "plastic" ,
-                           "plate" ,
-                           "platform" ,
-                           "player" ,
-                           "please" ,
-                           "pleasure" ,
-                           "plenty" ,
-                           "pocket" ,
-                           "poetry" ,
-                           "point" ,
-                           "police" ,
-                           "policy" ,
-                           "political" ,
-                           "politically" ,
-                           "politician" ,
-                           "politics" ,
-                           "pollution" ,
-                           "popular" ,
-                           "population" ,
-                           "porch" ,
-                           "portion" ,
-                           "portrait" ,
-                           "portray" ,
-                           "position" ,
-                           "positive" ,
-                           "possess" ,
-                           "possibility" ,
-                           "possible" ,
-                           "possibly" ,
-                           "potato" ,
-                           "potential" ,
-                           "potentially" ,
-                           "pound" ,
-                           "poverty" ,
-                           "powder" ,
-                           "power" ,
-                           "powerful" ,
-                           "practical" ,
-                           "practice" ,
-                           "prayer" ,
-                           "precisely" ,
-                           "predict" ,
-                           "prefer" ,
-                           "preference" ,
-                           "pregnancy" ,
-                           "pregnant" ,
-                           "preparation" ,
-                           "prepare" ,
-                           "prescription" ,
-                           "presence" ,
-                           "present" ,
-                           "presentation" ,
-                           "preserve" ,
-                           "president" ,
-                           "presidential" ,
-                           "press" ,
-                           "pressure" ,
-                           "pretend" ,
-                           "pretty" ,
-                           "prevent" ,
-                           "previous" ,
-                           "previously" ,
-                           "price" ,
-                           "pride" ,
-                           "priest" ,
-                           "primarily" ,
-                           "primary" ,
-                           "prime" ,
-                           "principal" ,
-                           "principle" ,
-                           "print" ,
-                           "prior" ,
-                           "priority" ,
-                           "prison" ,
-                           "prisoner" ,
-                           "privacy" ,
-                           "private" ,
-                           "probably" ,
-                           "problem" ,
-                           "procedure" ,
-                           "proceed" ,
-                           "process" ,
-                           "produce" ,
-                           "producer" ,
-                           "product" ,
-                           "production" ,
-                           "profession" ,
-                           "professional" ,
-                           "professor" ,
-                           "profile" ,
-                           "profit" ,
-                           "program" ,
-                           "progress" ,
-                           "project" ,
-                           "prominent" ,
-                           "promise" ,
-                           "promote" ,
-                           "prompt" ,
-                           "proof" ,
-                           "proper" ,
-                           "properly" ,
-                           "property" ,
-                           "proportion" ,
-                           "proposal" ,
-                           "propose" ,
-                           "proposed" ,
-                           "prosecutor" ,
-                           "prospect" ,
-                           "protect" ,
-                           "protection" ,
-                           "protein" ,
-                           "protest" ,
-                           "proud" ,
-                           "prove" ,
-                           "provide" ,
-                           "provider" ,
-                           "province" ,
-                           "provision" ,
-                           "psychological" ,
-                           "psychologist" ,
-                           "psychology" ,
-                           "public" ,
-                           "publication" ,
-                           "publicly" ,
-                           "publish" ,
-                           "publisher" ,
-                           "punishment" ,
-                           "purchase" ,
-                           "purpose" ,
-                           "pursue" ,
-                           "qualify" ,
-                           "quality" ,
-                           "quarter" ,
-                           "quarterback" ,
-                           "question" ,
-                           "quick" ,
-                           "quickly" ,
-                           "quiet" ,
-                           "quietly" ,
-                           "quite" ,
-                           "quote" ,
-                           "racial" ,
-                           "radical" ,
-                           "radio" ,
-                           "raise" ,
-                           "range" ,
-                           "rapid" ,
-                           "rapidly" ,
-                           "rarely" ,
-                           "rather" ,
-                           "rating" ,
-                           "ratio" ,
-                           "reach" ,
-                           "react" ,
-                           "reaction" ,
-                           "reader" ,
-                           "reading" ,
-                           "ready" ,
-                           "reality" ,
-                           "realize" ,
-                           "really" ,
-                           "reason" ,
-                           "reasonable" ,
-                           "recall" ,
-                           "receive" ,
-                           "recent" ,
-                           "recently" ,
-                           "recipe" ,
-                           "recognition" ,
-                           "recognize" ,
-                           "recommend" ,
-                           "recommendation" ,
-                           "record" ,
-                           "recording" ,
-                           "recover" ,
-                           "recovery" ,
-                           "recruit" ,
-                           "reduce" ,
-                           "reduction" ,
-                           "refer" ,
-                           "reference" ,
-                           "reflect" ,
-                           "reflection" ,
-                           "reform" ,
-                           "refugee" ,
-                           "refuse" ,
-                           "regard" ,
-                           "regarding" ,
-                           "regardless" ,
-                           "regime" ,
-                           "region" ,
-                           "regional" ,
-                           "register" ,
-                           "regular" ,
-                           "regularly" ,
-                           "regulate" ,
-                           "regulation" ,
-                           "reinforce" ,
-                           "reject" ,
-                           "relate" ,
-                           "relation" ,
-                           "relationship" ,
-                           "relative" ,
-                           "relatively" ,
-                           "relax" ,
-                           "release" ,
-                           "relevant" ,
-                           "relief" ,
-                           "religion" ,
-                           "religious" ,
-                           "remain" ,
-                           "remaining" ,
-                           "remarkable" ,
-                           "remember" ,
-                           "remind" ,
-                           "remote" ,
-                           "remove" ,
-                           "repeat" ,
-                           "repeatedly" ,
-                           "replace" ,
-                           "reply" ,
-                           "report" ,
-                           "reporter" ,
-                           "represent" ,
-                           "representation" ,
-                           "representative" ,
-                           "Republican" ,
-                           "reputation" ,
-                           "request" ,
-                           "require" ,
-                           "requirement" ,
-                           "research" ,
-                           "researcher" ,
-                           "resemble" ,
-                           "reservation" ,
-                           "resident" ,
-                           "resist" ,
-                           "resistance" ,
-                           "resolution" ,
-                           "resolve" ,
-                           "resort" ,
-                           "resource" ,
-                           "respect" ,
-                           "respond" ,
-                           "respondent" ,
-                           "response" ,
-                           "responsibility" ,
-                           "responsible" ,
-                           "restaurant" ,
-                           "restore" ,
-                           "restriction" ,
-                           "result" ,
-                           "retain" ,
-                           "retire" ,
-                           "retirement" ,
-                           "return" ,
-                           "reveal" ,
-                           "revenue" ,
-                           "review" ,
-                           "revolution" ,
-                           "rhythm" ,
-                           "rifle" ,
-                           "right" ,
-                           "river" ,
-                           "romantic" ,
-                           "rough" ,
-                           "roughly" ,
-                           "round" ,
-                           "route" ,
-                           "routine" ,
-                           "running" ,
-                           "rural" ,
-                           "Russian" ,
-                           "sacred" ,
-                           "safety" ,
-                           "salad" ,
-                           "salary" ,
-                           "sales" ,
-                           "sample" ,
-                           "sanction" ,
-                           "satellite" ,
-                           "satisfaction" ,
-                           "satisfy" ,
-                           "sauce" ,
-                           "saving" ,
-                           "scale" ,
-                           "scandal" ,
-                           "scared" ,
-                           "scenario" ,
-                           "scene" ,
-                           "schedule" ,
-                           "scheme" ,
-                           "scholar" ,
-                           "scholarship" ,
-                           "school" ,
-                           "science" ,
-                           "scientific" ,
-                           "scientist" ,
-                           "scope" ,
-                           "score" ,
-                           "scream" ,
-                           "screen" ,
-                           "script" ,
-                           "search" ,
-                           "season" ,
-                           "second" ,
-                           "secret" ,
-                           "secretary" ,
-                           "section" ,
-                           "sector" ,
-                           "secure" ,
-                           "security" ,
-                           "segment" ,
-                           "seize" ,
-                           "select" ,
-                           "selection" ,
-                           "Senate" ,
-                           "senator" ,
-                           "senior" ,
-                           "sense" ,
-                           "sensitive" ,
-                           "sentence" ,
-                           "separate" ,
-                           "sequence" ,
-                           "series" ,
-                           "serious" ,
-                           "seriously" ,
-                           "serve" ,
-                           "service" ,
-                           "session" ,
-                           "setting" ,
-                           "settle" ,
-                           "settlement" ,
-                           "seven" ,
-                           "several" ,
-                           "severe" ,
-                           "sexual" ,
-                           "shade" ,
-                           "shadow" ,
-                           "shake" ,
-                           "shall" ,
-                           "shape" ,
-                           "share" ,
-                           "sharp" ,
-                           "sheet" ,
-                           "shelf" ,
-                           "shell" ,
-                           "shelter" ,
-                           "shift" ,
-                           "shine" ,
-                           "shirt" ,
-                           "shock" ,
-                           "shoot" ,
-                           "shooting" ,
-                           "shopping" ,
-                           "shore" ,
-                           "short" ,
-                           "shortly" ,
-                           "should" ,
-                           "shoulder" ,
-                           "shout" ,
-                           "shower" ,
-                           "shrug" ,
-                           "sight" ,
-                           "signal" ,
-                           "significance" ,
-                           "significant" ,
-                           "significantly" ,
-                           "silence" ,
-                           "silent" ,
-                           "silver" ,
-                           "similar" ,
-                           "similarly" ,
-                           "simple" ,
-                           "simply" ,
-                           "since" ,
-                           "singer" ,
-                           "single" ,
-                           "sister" ,
-                           "situation" ,
-                           "skill" ,
-                           "slave" ,
-                           "sleep" ,
-                           "slice" ,
-                           "slide" ,
-                           "slight" ,
-                           "slightly" ,
-                           "slowly" ,
-                           "small" ,
-                           "smart" ,
-                           "smell" ,
-                           "smile" ,
-                           "smoke" ,
-                           "smooth" ,
-                           "so-called" ,
-                           "soccer" ,
-                           "social" ,
-                           "society" ,
-                           "software" ,
-                           "solar" ,
-                           "soldier" ,
-                           "solid" ,
-                           "solution" ,
-                           "solve" ,
-                           "somebody" ,
-                           "somehow" ,
-                           "someone" ,
-                           "something" ,
-                           "sometimes" ,
-                           "somewhat" ,
-                           "somewhere" ,
-                           "sophisticated" ,
-                           "sorry" ,
-                           "sound" ,
-                           "source" ,
-                           "south" ,
-                           "southern" ,
-                           "Soviet" ,
-                           "space" ,
-                           "Spanish" ,
-                           "speak" ,
-                           "speaker" ,
-                           "special" ,
-                           "specialist" ,
-                           "species" ,
-                           "specific" ,
-                           "specifically" ,
-                           "speech" ,
-                           "speed" ,
-                           "spend" ,
-                           "spending" ,
-                           "spirit" ,
-                           "spiritual" ,
-                           "split" ,
-                           "spokesman" ,
-                           "sport" ,
-                           "spread" ,
-                           "spring" ,
-                           "square" ,
-                           "squeeze" ,
-                           "stability" ,
-                           "stable" ,
-                           "staff" ,
-                           "stage" ,
-                           "stair" ,
-                           "stake" ,
-                           "stand" ,
-                           "standard" ,
-                           "standing" ,
-                           "stare" ,
-                           "start" ,
-                           "state" ,
-                           "statement" ,
-                           "station" ,
-                           "statistics" ,
-                           "status" ,
-                           "steady" ,
-                           "steal" ,
-                           "steel" ,
-                           "stick" ,
-                           "still" ,
-                           "stock" ,
-                           "stomach" ,
-                           "stone" ,
-                           "storage" ,
-                           "store" ,
-                           "storm" ,
-                           "story" ,
-                           "straight" ,
-                           "strange" ,
-                           "stranger" ,
-                           "strategic" ,
-                           "strategy" ,
-                           "stream" ,
-                           "street" ,
-                           "strength" ,
-                           "strengthen" ,
-                           "stress" ,
-                           "stretch" ,
-                           "strike" ,
-                           "string" ,
-                           "strip" ,
-                           "stroke" ,
-                           "strong" ,
-                           "strongly" ,
-                           "structure" ,
-                           "struggle" ,
-                           "student" ,
-                           "studio" ,
-                           "study" ,
-                           "stuff" ,
-                           "stupid" ,
-                           "style" ,
-                           "subject" ,
-                           "submit" ,
-                           "subsequent" ,
-                           "substance" ,
-                           "substantial" ,
-                           "succeed" ,
-                           "success" ,
-                           "successful" ,
-                           "successfully" ,
-                           "sudden" ,
-                           "suddenly" ,
-                           "suffer" ,
-                           "sufficient" ,
-                           "sugar" ,
-                           "suggest" ,
-                           "suggestion" ,
-                           "suicide" ,
-                           "summer" ,
-                           "summit" ,
-                           "super" ,
-                           "supply" ,
-                           "support" ,
-                           "supporter" ,
-                           "suppose" ,
-                           "supposed" ,
-                           "Supreme" ,
-                           "surely" ,
-                           "surface" ,
-                           "surgery" ,
-                           "surprise" ,
-                           "surprised" ,
-                           "surprising" ,
-                           "surprisingly" ,
-                           "surround" ,
-                           "survey" ,
-                           "survival" ,
-                           "survive" ,
-                           "survivor" ,
-                           "suspect" ,
-                           "sustain" ,
-                           "swear" ,
-                           "sweep" ,
-                           "sweet" ,
-                           "swing" ,
-                           "switch" ,
-                           "symbol" ,
-                           "symptom" ,
-                           "system" ,
-                           "table" ,
-                           "tablespoon" ,
-                           "tactic" ,
-                           "talent" ,
-                           "target" ,
-                           "taste" ,
-                           "taxpayer" ,
-                           "teach" ,
-                           "teacher" ,
-                           "teaching" ,
-                           "teaspoon" ,
-                           "technical" ,
-                           "technique" ,
-                           "technology" ,
-                           "teenager" ,
-                           "telephone" ,
-                           "telescope" ,
-                           "television" ,
-                           "temperature" ,
-                           "temporary" ,
-                           "tendency" ,
-                           "tennis" ,
-                           "tension" ,
-                           "terms" ,
-                           "terrible" ,
-                           "territory" ,
-                           "terror" ,
-                           "terrorism" ,
-                           "terrorist" ,
-                           "testify" ,
-                           "testimony" ,
-                           "testing" ,
-                           "thank" ,
-                           "thanks" ,
-                           "theater" ,
-                           "their" ,
-                           "theme" ,
-                           "themselves" ,
-                           "theory" ,
-                           "therapy" ,
-                           "there" ,
-                           "therefore" ,
-                           "these" ,
-                           "thick" ,
-                           "thing" ,
-                           "think" ,
-                           "thinking" ,
-                           "third" ,
-                           "thirty" ,
-                           "those" ,
-                           "though" ,
-                           "thought" ,
-                           "thousand" ,
-                           "threat" ,
-                           "threaten" ,
-                           "three" ,
-                           "throat" ,
-                           "through" ,
-                           "throughout" ,
-                           "throw" ,
-                           "ticket" ,
-                           "tight" ,
-                           "tired" ,
-                           "tissue" ,
-                           "title" ,
-                           "tobacco" ,
-                           "today" ,
-                           "together" ,
-                           "tomato" ,
-                           "tomorrow" ,
-                           "tongue" ,
-                           "tonight" ,
-                           "tooth" ,
-                           "topic" ,
-                           "total" ,
-                           "totally" ,
-                           "touch" ,
-                           "tough" ,
-                           "tourist" ,
-                           "tournament" ,
-                           "toward" ,
-                           "towards" ,
-                           "tower" ,
-                           "trace" ,
-                           "track" ,
-                           "trade" ,
-                           "tradition" ,
-                           "traditional" ,
-                           "traffic" ,
-                           "tragedy" ,
-                           "trail" ,
-                           "train" ,
-                           "training" ,
-                           "transfer" ,
-                           "transform" ,
-                           "transformation" ,
-                           "transition" ,
-                           "translate" ,
-                           "transportation" ,
-                           "travel" ,
-                           "treat" ,
-                           "treatment" ,
-                           "treaty" ,
-                           "tremendous" ,
-                           "trend" ,
-                           "trial" ,
-                           "tribe" ,
-                           "trick" ,
-                           "troop" ,
-                           "trouble" ,
-                           "truck" ,
-                           "truly" ,
-                           "trust" ,
-                           "truth" ,
-                           "tunnel" ,
-                           "twelve" ,
-                           "twenty" ,
-                           "twice" ,
-                           "typical" ,
-                           "typically" ,
-                           "ultimate" ,
-                           "ultimately" ,
-                           "unable" ,
-                           "uncle" ,
-                           "under" ,
-                           "undergo" ,
-                           "understand" ,
-                           "understanding" ,
-                           "unfortunately" ,
-                           "uniform" ,
-                           "union" ,
-                           "unique" ,
-                           "United" ,
-                           "universal" ,
-                           "universe" ,
-                           "university" ,
-                           "unknown" ,
-                           "unless" ,
-                           "unlike" ,
-                           "unlikely" ,
-                           "until" ,
-                           "unusual" ,
-                           "upper" ,
-                           "urban" ,
-                           "useful" ,
-                           "usual" ,
-                           "usually" ,
-                           "utility" ,
-                           "vacation" ,
-                           "valley" ,
-                           "valuable" ,
-                           "value" ,
-                           "variable" ,
-                           "variation" ,
-                           "variety" ,
-                           "various" ,
-                           "vegetable" ,
-                           "vehicle" ,
-                           "venture" ,
-                           "version" ,
-                           "versus" ,
-                           "vessel" ,
-                           "veteran" ,
-                           "victim" ,
-                           "victory" ,
-                           "video" ,
-                           "viewer" ,
-                           "village" ,
-                           "violate" ,
-                           "violation" ,
-                           "violence" ,
-                           "violent" ,
-                           "virtually" ,
-                           "virtue" ,
-                           "virus" ,
-                           "visible" ,
-                           "vision" ,
-                           "visit" ,
-                           "visitor" ,
-                           "visual" ,
-                           "vital" ,
-                           "voice" ,
-                           "volume" ,
-                           "volunteer" ,
-                           "voter" ,
-                           "vulnerable" ,
-                           "wander" ,
-                           "warning" ,
-                           "waste" ,
-                           "watch" ,
-                           "water" ,
-                           "wealth" ,
-                           "wealthy" ,
-                           "weapon" ,
-                           "weather" ,
-                           "wedding" ,
-                           "weekend" ,
-                           "weekly" ,
-                           "weigh" ,
-                           "weight" ,
-                           "welcome" ,
-                           "welfare" ,
-                           "western" ,
-                           "whatever" ,
-                           "wheel" ,
-                           "whenever" ,
-                           "where" ,
-                           "whereas" ,
-                           "whether" ,
-                           "which" ,
-                           "while" ,
-                           "whisper" ,
-                           "white" ,
-                           "whole" ,
-                           "whose" ,
-                           "widely" ,
-                           "widespread" ,
-                           "willing" ,
-                           "window" ,
-                           "winner" ,
-                           "winter" ,
-                           "wisdom" ,
-                           "within" ,
-                           "without" ,
-                           "witness" ,
-                           "woman" ,
-                           "wonder" ,
-                           "wonderful" ,
-                           "wooden" ,
-                           "worker" ,
-                           "working" ,
-                           "works" ,
-                           "workshop" ,
-                           "world" ,
-                           "worried" ,
-                           "worry" ,
-                           "worth" ,
-                           "would" ,
-                           "wound" ,
-                           "write" ,
-                           "writer" ,
-                           "writing" ,
-                           "wrong" ,
-                           "yellow" ,
-                           "yesterday" ,
-                           "yield" ,
-                           "young" ,
-                           "yours" ,
-                           "yourself" ,
-                           "youth",
+    listofwords.push_back( "abandon" );         //should be 1312 words that have length from 5 to 12 characters
+    listofwords.push_back( "ability" );
+    listofwords.push_back( "abortion" );
+    listofwords.push_back( "absence" );
+    listofwords.push_back( "absolute" );
+    listofwords.push_back( "absolutely" );
+    listofwords.push_back( "academic" );
+    listofwords.push_back( "accident" );
+    listofwords.push_back( "accompany" );
+    listofwords.push_back( "accomplish" );
+    listofwords.push_back( "according" );
+    listofwords.push_back( "account" );
+    listofwords.push_back( "accurate" );
+    listofwords.push_back( "achieve" );
+    listofwords.push_back( "achievement" );
+    listofwords.push_back( "acknowledge" );
+    listofwords.push_back( "acquire" );
+    listofwords.push_back( "activist" );
+    listofwords.push_back( "activity" );
+    listofwords.push_back( "actress" );
+    listofwords.push_back( "actually" );
+    listofwords.push_back( "addition" );
+    listofwords.push_back( "additional" );
+    listofwords.push_back( "address" );
+    listofwords.push_back( "adequate" );
+    listofwords.push_back( "adjustment" );
+    listofwords.push_back( "administration" );
+    listofwords.push_back( "administrator" );
+    listofwords.push_back( "admission" );
+    listofwords.push_back( "adolescent" );
+    listofwords.push_back( "advance" );
+    listofwords.push_back( "advanced" );
+    listofwords.push_back( "advantage" );
+    listofwords.push_back( "adventure" );
+    listofwords.push_back( "advertising" );
+    listofwords.push_back( "adviser" );
+    listofwords.push_back( "advocate" );
+    listofwords.push_back( "african" );
+    listofwords.push_back( "afternoon" );
+    listofwords.push_back( "against" );
+    listofwords.push_back( "aggressive" );
+    listofwords.push_back( "agreement" );
+    listofwords.push_back( "agricultural" );
+    listofwords.push_back( "aircraft" );
+    listofwords.push_back( "airline" );
+    listofwords.push_back( "airport" );
+    listofwords.push_back( "alcohol" );
+    listofwords.push_back( "alliance" );
+    listofwords.push_back( "already" );
+    listofwords.push_back( "alternative" );
+    listofwords.push_back( "although" );
+    listofwords.push_back( "amazing" );
+    listofwords.push_back( "american" );
+    listofwords.push_back( "analysis" );
+    listofwords.push_back( "analyst" );
+    listofwords.push_back( "analyze" );
+    listofwords.push_back( "ancient" );
+    listofwords.push_back( "anniversary" );
+    listofwords.push_back( "announce" );
+    listofwords.push_back( "another" );
+    listofwords.push_back( "anticipate" );
+    listofwords.push_back( "anxiety" );
+    listofwords.push_back( "anybody" );
+    listofwords.push_back( "anymore" );
+    listofwords.push_back( "anything" );
+    listofwords.push_back( "anywhere" );
+    listofwords.push_back( "apartment" );
+    listofwords.push_back( "apparent" );
+    listofwords.push_back( "apparently" );
+    listofwords.push_back( "appearance" );
+    listofwords.push_back( "application" );
+    listofwords.push_back( "appoint" );
+    listofwords.push_back( "appointment" );
+    listofwords.push_back( "appreciate" );
+    listofwords.push_back( "approach" );
+    listofwords.push_back( "appropriate" );
+    listofwords.push_back( "approval" );
+    listofwords.push_back( "approve" );
+    listofwords.push_back( "approximately" );
+    listofwords.push_back( "architect" );
+    listofwords.push_back( "argument" );
+    listofwords.push_back( "arrange" );
+    listofwords.push_back( "arrangement" );
+    listofwords.push_back( "arrival" );
+    listofwords.push_back( "article" );
+    listofwords.push_back( "artistic" );
+    listofwords.push_back( "assault" );
+    listofwords.push_back( "assessment" );
+    listofwords.push_back( "assignment" );
+    listofwords.push_back( "assistance" );
+    listofwords.push_back( "assistant" );
+    listofwords.push_back( "associate" );
+    listofwords.push_back( "association" );
+    listofwords.push_back( "assumption" );
+    listofwords.push_back( "athlete" );
+    listofwords.push_back( "athletic" );
+    listofwords.push_back( "atmosphere" );
+    listofwords.push_back( "attempt" );
+    listofwords.push_back( "attention" );
+    listofwords.push_back( "attitude" );
+    listofwords.push_back( "attorney" );
+    listofwords.push_back( "attract" );
+    listofwords.push_back( "attractive" );
+    listofwords.push_back( "attribute" );
+    listofwords.push_back( "audience" );
+    listofwords.push_back( "authority" );
+    listofwords.push_back( "available" );
+    listofwords.push_back( "average" );
+    listofwords.push_back( "awareness" );
+    listofwords.push_back( "background" );
+    listofwords.push_back( "balance" );
+    listofwords.push_back( "barrier" );
+    listofwords.push_back( "baseball" );
+    listofwords.push_back( "basically" );
+    listofwords.push_back( "basketball" );
+    listofwords.push_back( "bathroom" );
+    listofwords.push_back( "battery" );
+    listofwords.push_back( "beautiful" );
+    listofwords.push_back( "because" );
+    listofwords.push_back( "bedroom" );
+    listofwords.push_back( "beginning" );
+    listofwords.push_back( "behavior" );
+    listofwords.push_back( "believe" );
+    listofwords.push_back( "beneath" );
+    listofwords.push_back( "benefit" );
+    listofwords.push_back( "besides" );
+    listofwords.push_back( "between" );
+    listofwords.push_back( "billion" );
+    listofwords.push_back( "biological" );
+    listofwords.push_back( "birthday" );
+    listofwords.push_back( "blanket" );
+    listofwords.push_back( "bombing" );
+    listofwords.push_back( "boundary" );
+    listofwords.push_back( "boyfriend" );
+    listofwords.push_back( "breakfast" );
+    listofwords.push_back( "breathe" );
+    listofwords.push_back( "briefly" );
+    listofwords.push_back( "brilliant" );
+    listofwords.push_back( "british" );
+    listofwords.push_back( "brother" );
+    listofwords.push_back( "building" );
+    listofwords.push_back( "business" );
+    listofwords.push_back( "cabinet" );
+    listofwords.push_back( "calculate" );
+    listofwords.push_back( "campaign" );
+    listofwords.push_back( "canadian" );
+    listofwords.push_back( "candidate" );
+    listofwords.push_back( "capability" );
+    listofwords.push_back( "capable" );
+    listofwords.push_back( "capacity" );
+    listofwords.push_back( "capital" );
+    listofwords.push_back( "captain" );
+    listofwords.push_back( "capture" );
+    listofwords.push_back( "careful" );
+    listofwords.push_back( "carefully" );
+    listofwords.push_back( "carrier" );
+    listofwords.push_back( "category" );
+    listofwords.push_back( "catholic" );
+    listofwords.push_back( "ceiling" );
+    listofwords.push_back( "celebrate" );
+    listofwords.push_back( "celebration" );
+    listofwords.push_back( "celebrity" );
+    listofwords.push_back( "central" );
+    listofwords.push_back( "century" );
+    listofwords.push_back( "ceremony" );
+    listofwords.push_back( "certain" );
+    listofwords.push_back( "certainly" );
+    listofwords.push_back( "chairman" );
+    listofwords.push_back( "challenge" );
+    listofwords.push_back( "chamber" );
+    listofwords.push_back( "champion" );
+    listofwords.push_back( "championship" );
+    listofwords.push_back( "changing" );
+    listofwords.push_back( "channel" );
+    listofwords.push_back( "chapter" );
+    listofwords.push_back( "character" );
+    listofwords.push_back( "characteristic" );
+    listofwords.push_back( "characterize" );
+    listofwords.push_back( "charity" );
+    listofwords.push_back( "chemical" );
+    listofwords.push_back( "chicken" );
+    listofwords.push_back( "childhood" );
+    listofwords.push_back( "chinese" );
+    listofwords.push_back( "chocolate" );
+    listofwords.push_back( "cholesterol" );
+    listofwords.push_back( "christian" );
+    listofwords.push_back( "christmas" );
+    listofwords.push_back( "cigarette" );
+    listofwords.push_back( "circumstance" );
+    listofwords.push_back( "citizen" );
+    listofwords.push_back( "civilian" );
+    listofwords.push_back( "classic" );
+    listofwords.push_back( "classroom" );
+    listofwords.push_back( "clearly" );
+    listofwords.push_back( "climate" );
+    listofwords.push_back( "clinical" );
+    listofwords.push_back( "closely" );
+    listofwords.push_back( "clothes" );
+    listofwords.push_back( "clothing" );
+    listofwords.push_back( "cluster" );
+    listofwords.push_back( "coalition" );
+    listofwords.push_back( "cognitive" );
+    listofwords.push_back( "collapse" );
+    listofwords.push_back( "colleague" );
+    listofwords.push_back( "collect" );
+    listofwords.push_back( "collection" );
+    listofwords.push_back( "collective" );
+    listofwords.push_back( "college" );
+    listofwords.push_back( "colonial" );
+    listofwords.push_back( "combination" );
+    listofwords.push_back( "combine" );
+    listofwords.push_back( "comfort" );
+    listofwords.push_back( "comfortable" );
+    listofwords.push_back( "command" );
+    listofwords.push_back( "commander" );
+    listofwords.push_back( "comment" );
+    listofwords.push_back( "commercial" );
+    listofwords.push_back( "commission" );
+    listofwords.push_back( "commitment" );
+    listofwords.push_back( "committee" );
+    listofwords.push_back( "communicate" );
+    listofwords.push_back( "communication" );
+    listofwords.push_back( "community" );
+    listofwords.push_back( "company" );
+    listofwords.push_back( "compare" );
+    listofwords.push_back( "comparison" );
+    listofwords.push_back( "compete" );
+    listofwords.push_back( "competition" );
+    listofwords.push_back( "competitive" );
+    listofwords.push_back( "competitor" );
+    listofwords.push_back( "complain" );
+    listofwords.push_back( "complaint" );
+    listofwords.push_back( "complete" );
+    listofwords.push_back( "completely" );
+    listofwords.push_back( "complex" );
+    listofwords.push_back( "complicated" );
+    listofwords.push_back( "component" );
+    listofwords.push_back( "compose" );
+    listofwords.push_back( "composition" );
+    listofwords.push_back( "comprehensive" );
+    listofwords.push_back( "computer" );
+    listofwords.push_back( "concentrate" );
+    listofwords.push_back( "concentration" );
+    listofwords.push_back( "concept" );
+    listofwords.push_back( "concern" );
+    listofwords.push_back( "concerned" );
+    listofwords.push_back( "concert" );
+    listofwords.push_back( "conclude" );
+    listofwords.push_back( "conclusion" );
+    listofwords.push_back( "concrete" );
+    listofwords.push_back( "condition" );
+    listofwords.push_back( "conduct" );
+    listofwords.push_back( "conference" );
+    listofwords.push_back( "confidence" );
+    listofwords.push_back( "confident" );
+    listofwords.push_back( "confirm" );
+    listofwords.push_back( "conflict" );
+    listofwords.push_back( "confront" );
+    listofwords.push_back( "confusion" );
+    listofwords.push_back( "congress" );
+    listofwords.push_back( "congressional" );
+    listofwords.push_back( "connect" );
+    listofwords.push_back( "connection" );
+    listofwords.push_back( "consciousness" );
+    listofwords.push_back( "consensus" );
+    listofwords.push_back( "consequence" );
+    listofwords.push_back( "conservative" );
+    listofwords.push_back( "consider" );
+    listofwords.push_back( "considerable" );
+    listofwords.push_back( "consideration" );
+    listofwords.push_back( "consist" );
+    listofwords.push_back( "consistent" );
+    listofwords.push_back( "constant" );
+    listofwords.push_back( "constantly" );
+    listofwords.push_back( "constitute" );
+    listofwords.push_back( "constitutional" );
+    listofwords.push_back( "construct" );
+    listofwords.push_back( "construction" );
+    listofwords.push_back( "consultant" );
+    listofwords.push_back( "consume" );
+    listofwords.push_back( "consumer" );
+    listofwords.push_back( "consumption" );
+    listofwords.push_back( "contact" );
+    listofwords.push_back( "contain" );
+    listofwords.push_back( "container" );
+    listofwords.push_back( "contemporary" );
+    listofwords.push_back( "content" );
+    listofwords.push_back( "contest" );
+    listofwords.push_back( "context" );
+    listofwords.push_back( "continue" );
+    listofwords.push_back( "continued" );
+    listofwords.push_back( "contract" );
+    listofwords.push_back( "contrast" );
+    listofwords.push_back( "contribute" );
+    listofwords.push_back( "contribution" );
+    listofwords.push_back( "control" );
+    listofwords.push_back( "controversial" );
+    listofwords.push_back( "controversy" );
+    listofwords.push_back( "convention" );
+    listofwords.push_back( "conventional" );
+    listofwords.push_back( "conversation" );
+    listofwords.push_back( "convert" );
+    listofwords.push_back( "conviction" );
+    listofwords.push_back( "convince" );
+    listofwords.push_back( "cooking" );
+    listofwords.push_back( "cooperation" );
+    listofwords.push_back( "corporate" );
+    listofwords.push_back( "corporation" );
+    listofwords.push_back( "correct" );
+    listofwords.push_back( "correspondent" );
+    listofwords.push_back( "council" );
+    listofwords.push_back( "counselor" );
+    listofwords.push_back( "counter" );
+    listofwords.push_back( "country" );
+    listofwords.push_back( "courage" );
+    listofwords.push_back( "coverage" );
+    listofwords.push_back( "creation" );
+    listofwords.push_back( "creative" );
+    listofwords.push_back( "creature" );
+    listofwords.push_back( "criminal" );
+    listofwords.push_back( "criteria" );
+    listofwords.push_back( "critical" );
+    listofwords.push_back( "criticism" );
+    listofwords.push_back( "criticize" );
+    listofwords.push_back( "crucial" );
+    listofwords.push_back( "cultural" );
+    listofwords.push_back( "culture" );
+    listofwords.push_back( "curious" );
+    listofwords.push_back( "current" );
+    listofwords.push_back( "currently" );
+    listofwords.push_back( "curriculum" );
+    listofwords.push_back( "customer" );
+    listofwords.push_back( "dangerous" );
+    listofwords.push_back( "darkness" );
+    listofwords.push_back( "daughter" );
+    listofwords.push_back( "decision" );
+    listofwords.push_back( "declare" );
+    listofwords.push_back( "decline" );
+    listofwords.push_back( "decrease" );
+    listofwords.push_back( "defendant" );
+    listofwords.push_back( "defense" );
+    listofwords.push_back( "defensive" );
+    listofwords.push_back( "deficit" );
+    listofwords.push_back( "definitely" );
+    listofwords.push_back( "definition" );
+    listofwords.push_back( "deliver" );
+    listofwords.push_back( "delivery" );
+    listofwords.push_back( "democracy" );
+    listofwords.push_back( "democrat" );
+    listofwords.push_back( "democratic" );
+    listofwords.push_back( "demonstrate" );
+    listofwords.push_back( "demonstration" );
+    listofwords.push_back( "department" );
+    listofwords.push_back( "dependent" );
+    listofwords.push_back( "depending" );
+    listofwords.push_back( "depression" );
+    listofwords.push_back( "describe" );
+    listofwords.push_back( "description" );
+    listofwords.push_back( "deserve" );
+    listofwords.push_back( "designer" );
+    listofwords.push_back( "desperate" );
+    listofwords.push_back( "despite" );
+    listofwords.push_back( "destroy" );
+    listofwords.push_back( "destruction" );
+    listofwords.push_back( "detailed" );
+    listofwords.push_back( "determine" );
+    listofwords.push_back( "develop" );
+    listofwords.push_back( "developing" );
+    listofwords.push_back( "development" );
+    listofwords.push_back( "dialogue" );
+    listofwords.push_back( "difference" );
+    listofwords.push_back( "different" );
+    listofwords.push_back( "differently" );
+    listofwords.push_back( "difficult" );
+    listofwords.push_back( "difficulty" );
+    listofwords.push_back( "digital" );
+    listofwords.push_back( "dimension" );
+    listofwords.push_back( "direction" );
+    listofwords.push_back( "directly" );
+    listofwords.push_back( "director" );
+    listofwords.push_back( "disability" );
+    listofwords.push_back( "disagree" );
+    listofwords.push_back( "disappear" );
+    listofwords.push_back( "disaster" );
+    listofwords.push_back( "discipline" );
+    listofwords.push_back( "discourse" );
+    listofwords.push_back( "discover" );
+    listofwords.push_back( "discovery" );
+    listofwords.push_back( "discrimination" );
+    listofwords.push_back( "discuss" );
+    listofwords.push_back( "discussion" );
+    listofwords.push_back( "disease" );
+    listofwords.push_back( "dismiss" );
+    listofwords.push_back( "disorder" );
+    listofwords.push_back( "display" );
+    listofwords.push_back( "dispute" );
+    listofwords.push_back( "distance" );
+    listofwords.push_back( "distant" );
+    listofwords.push_back( "distinct" );
+    listofwords.push_back( "distinction" );
+    listofwords.push_back( "distinguish" );
+    listofwords.push_back( "distribute" );
+    listofwords.push_back( "distribution" );
+    listofwords.push_back( "district" );
+    listofwords.push_back( "diverse" );
+    listofwords.push_back( "diversity" );
+    listofwords.push_back( "division" );
+    listofwords.push_back( "divorce" );
+    listofwords.push_back( "document" );
+    listofwords.push_back( "domestic" );
+    listofwords.push_back( "dominant" );
+    listofwords.push_back( "dominate" );
+    listofwords.push_back( "downtown" );
+    listofwords.push_back( "dramatic" );
+    listofwords.push_back( "dramatically" );
+    listofwords.push_back( "drawing" );
+    listofwords.push_back( "earnings" );
+    listofwords.push_back( "eastern" );
+    listofwords.push_back( "economic" );
+    listofwords.push_back( "economics" );
+    listofwords.push_back( "economist" );
+    listofwords.push_back( "economy" );
+    listofwords.push_back( "edition" );
+    listofwords.push_back( "educate" );
+    listofwords.push_back( "education" );
+    listofwords.push_back( "educational" );
+    listofwords.push_back( "educator" );
+    listofwords.push_back( "effective" );
+    listofwords.push_back( "effectively" );
+    listofwords.push_back( "efficiency" );
+    listofwords.push_back( "efficient" );
+    listofwords.push_back( "elderly" );
+    listofwords.push_back( "election" );
+    listofwords.push_back( "electric" );
+    listofwords.push_back( "electricity" );
+    listofwords.push_back( "electronic" );
+    listofwords.push_back( "element" );
+    listofwords.push_back( "elementary" );
+    listofwords.push_back( "eliminate" );
+    listofwords.push_back( "elsewhere" );
+    listofwords.push_back( "embrace" );
+    listofwords.push_back( "emergency" );
+    listofwords.push_back( "emission" );
+    listofwords.push_back( "emotion" );
+    listofwords.push_back( "emotional" );
+    listofwords.push_back( "emphasis" );
+    listofwords.push_back( "emphasize" );
+    listofwords.push_back( "employee" );
+    listofwords.push_back( "employer" );
+    listofwords.push_back( "employment" );
+    listofwords.push_back( "encounter" );
+    listofwords.push_back( "encourage" );
+    listofwords.push_back( "enforcement" );
+    listofwords.push_back( "engineer" );
+    listofwords.push_back( "engineering" );
+    listofwords.push_back( "english" );
+    listofwords.push_back( "enhance" );
+    listofwords.push_back( "enormous" );
+    listofwords.push_back( "enterprise" );
+    listofwords.push_back( "entertainment" );
+    listofwords.push_back( "entirely" );
+    listofwords.push_back( "entrance" );
+    listofwords.push_back( "environment" );
+    listofwords.push_back( "environmental" );
+    listofwords.push_back( "episode" );
+    listofwords.push_back( "equally" );
+    listofwords.push_back( "equipment" );
+    listofwords.push_back( "especially" );
+    listofwords.push_back( "essential" );
+    listofwords.push_back( "essentially" );
+    listofwords.push_back( "establish" );
+    listofwords.push_back( "establishment" );
+    listofwords.push_back( "estimate" );
+    listofwords.push_back( "european" );
+    listofwords.push_back( "evaluate" );
+    listofwords.push_back( "evaluation" );
+    listofwords.push_back( "evening" );
+    listofwords.push_back( "eventually" );
+    listofwords.push_back( "everybody" );
+    listofwords.push_back( "everyday" );
+    listofwords.push_back( "everyone" );
+    listofwords.push_back( "everything" );
+    listofwords.push_back( "everywhere" );
+    listofwords.push_back( "evidence" );
+    listofwords.push_back( "evolution" );
+    listofwords.push_back( "exactly" );
+    listofwords.push_back( "examination" );
+    listofwords.push_back( "examine" );
+    listofwords.push_back( "example" );
+    listofwords.push_back( "excellent" );
+    listofwords.push_back( "exception" );
+    listofwords.push_back( "exchange" );
+    listofwords.push_back( "exciting" );
+    listofwords.push_back( "executive" );
+    listofwords.push_back( "exercise" );
+    listofwords.push_back( "exhibit" );
+    listofwords.push_back( "exhibition" );
+    listofwords.push_back( "existence" );
+    listofwords.push_back( "existing" );
+    listofwords.push_back( "expansion" );
+    listofwords.push_back( "expectation" );
+    listofwords.push_back( "expense" );
+    listofwords.push_back( "expensive" );
+    listofwords.push_back( "experience" );
+    listofwords.push_back( "experiment" );
+    listofwords.push_back( "explain" );
+    listofwords.push_back( "explanation" );
+    listofwords.push_back( "explode" );
+    listofwords.push_back( "explore" );
+    listofwords.push_back( "explosion" );
+    listofwords.push_back( "exposure" );
+    listofwords.push_back( "express" );
+    listofwords.push_back( "expression" );
+    listofwords.push_back( "extension" );
+    listofwords.push_back( "extensive" );
+    listofwords.push_back( "external" );
+    listofwords.push_back( "extraordinary" );
+    listofwords.push_back( "extreme" );
+    listofwords.push_back( "extremely" );
+    listofwords.push_back( "facility" );
+    listofwords.push_back( "factory" );
+    listofwords.push_back( "faculty" );
+    listofwords.push_back( "failure" );
+    listofwords.push_back( "familiar" );
+    listofwords.push_back( "fantasy" );
+    listofwords.push_back( "fashion" );
+    listofwords.push_back( "favorite" );
+    listofwords.push_back( "feature" );
+    listofwords.push_back( "federal" );
+    listofwords.push_back( "feeling" );
+    listofwords.push_back( "fiction" );
+    listofwords.push_back( "fifteen" );
+    listofwords.push_back( "fighter" );
+    listofwords.push_back( "fighting" );
+    listofwords.push_back( "finally" );
+    listofwords.push_back( "finance" );
+    listofwords.push_back( "financial" );
+    listofwords.push_back( "finding" );
+    listofwords.push_back( "fishing" );
+    listofwords.push_back( "fitness" );
+    listofwords.push_back( "following" );
+    listofwords.push_back( "football" );
+    listofwords.push_back( "foreign" );
+    listofwords.push_back( "forever" );
+    listofwords.push_back( "formation" );
+    listofwords.push_back( "formula" );
+    listofwords.push_back( "fortune" );
+    listofwords.push_back( "forward" );
+    listofwords.push_back( "foundation" );
+    listofwords.push_back( "founder" );
+    listofwords.push_back( "framework" );
+    listofwords.push_back( "freedom" );
+    listofwords.push_back( "frequency" );
+    listofwords.push_back( "frequent" );
+    listofwords.push_back( "frequently" );
+    listofwords.push_back( "friendly" );
+    listofwords.push_back( "friendship" );
+    listofwords.push_back( "frustration" );
+    listofwords.push_back( "function" );
+    listofwords.push_back( "fundamental" );
+    listofwords.push_back( "funding" );
+    listofwords.push_back( "funeral" );
+    listofwords.push_back( "furniture" );
+    listofwords.push_back( "furthermore" );
+    listofwords.push_back( "gallery" );
+    listofwords.push_back( "general" );
+    listofwords.push_back( "generally" );
+    listofwords.push_back( "generate" );
+    listofwords.push_back( "generation" );
+    listofwords.push_back( "genetic" );
+    listofwords.push_back( "gentleman" );
+    listofwords.push_back( "gesture" );
+    listofwords.push_back( "girlfriend" );
+    listofwords.push_back( "government" );
+    listofwords.push_back( "governor" );
+    listofwords.push_back( "gradually" );
+    listofwords.push_back( "graduate" );
+    listofwords.push_back( "grandfather" );
+    listofwords.push_back( "grandmother" );
+    listofwords.push_back( "greatest" );
+    listofwords.push_back( "grocery" );
+    listofwords.push_back( "growing" );
+    listofwords.push_back( "guarantee" );
+    listofwords.push_back( "guideline" );
+    listofwords.push_back( "habitat" );
+    listofwords.push_back( "handful" );
+    listofwords.push_back( "headline" );
+    listofwords.push_back( "headquarters" );
+    listofwords.push_back( "healthy" );
+    listofwords.push_back( "hearing" );
+    listofwords.push_back( "heavily" );
+    listofwords.push_back( "helicopter" );
+    listofwords.push_back( "helpful" );
+    listofwords.push_back( "heritage" );
+    listofwords.push_back( "herself" );
+    listofwords.push_back( "highlight" );
+    listofwords.push_back( "highway" );
+    listofwords.push_back( "himself" );
+    listofwords.push_back( "historian" );
+    listofwords.push_back( "historic" );
+    listofwords.push_back( "historical" );
+    listofwords.push_back( "history" );
+    listofwords.push_back( "holiday" );
+    listofwords.push_back( "homeless" );
+    listofwords.push_back( "horizon" );
+    listofwords.push_back( "hospital" );
+    listofwords.push_back( "household" );
+    listofwords.push_back( "housing" );
+    listofwords.push_back( "however" );
+    listofwords.push_back( "hundred" );
+    listofwords.push_back( "hunting" );
+    listofwords.push_back( "husband" );
+    listofwords.push_back( "hypothesis" );
+    listofwords.push_back( "identification" );
+    listofwords.push_back( "identify" );
+    listofwords.push_back( "identity" );
+    listofwords.push_back( "illegal" );
+    listofwords.push_back( "illness" );
+    listofwords.push_back( "illustrate" );
+    listofwords.push_back( "imagination" );
+    listofwords.push_back( "imagine" );
+    listofwords.push_back( "immediate" );
+    listofwords.push_back( "immediately" );
+    listofwords.push_back( "immigrant" );
+    listofwords.push_back( "immigration" );
+    listofwords.push_back( "implement" );
+    listofwords.push_back( "implication" );
+    listofwords.push_back( "importance" );
+    listofwords.push_back( "important" );
+    listofwords.push_back( "impossible" );
+    listofwords.push_back( "impress" );
+    listofwords.push_back( "impression" );
+    listofwords.push_back( "impressive" );
+    listofwords.push_back( "improve" );
+    listofwords.push_back( "improvement" );
+    listofwords.push_back( "incentive" );
+    listofwords.push_back( "incident" );
+    listofwords.push_back( "include" );
+    listofwords.push_back( "including" );
+    listofwords.push_back( "incorporate" );
+    listofwords.push_back( "increase" );
+    listofwords.push_back( "increased" );
+    listofwords.push_back( "increasing" );
+    listofwords.push_back( "increasingly" );
+    listofwords.push_back( "incredible" );
+    listofwords.push_back( "independence" );
+    listofwords.push_back( "independent" );
+    listofwords.push_back( "indicate" );
+    listofwords.push_back( "indication" );
+    listofwords.push_back( "individual" );
+    listofwords.push_back( "industrial" );
+    listofwords.push_back( "industry" );
+    listofwords.push_back( "infection" );
+    listofwords.push_back( "inflation" );
+    listofwords.push_back( "influence" );
+    listofwords.push_back( "information" );
+    listofwords.push_back( "ingredient" );
+    listofwords.push_back( "initial" );
+    listofwords.push_back( "initially" );
+    listofwords.push_back( "initiative" );
+    listofwords.push_back( "innocent" );
+    listofwords.push_back( "inquiry" );
+    listofwords.push_back( "insight" );
+    listofwords.push_back( "inspire" );
+    listofwords.push_back( "install" );
+    listofwords.push_back( "instance" );
+    listofwords.push_back( "instead" );
+    listofwords.push_back( "institution" );
+    listofwords.push_back( "institutional" );
+    listofwords.push_back( "instruction" );
+    listofwords.push_back( "instructor" );
+    listofwords.push_back( "instrument" );
+    listofwords.push_back( "insurance" );
+    listofwords.push_back( "intellectual" );
+    listofwords.push_back( "intelligence" );
+    listofwords.push_back( "intense" );
+    listofwords.push_back( "intensity" );
+    listofwords.push_back( "intention" );
+    listofwords.push_back( "interaction" );
+    listofwords.push_back( "interest" );
+    listofwords.push_back( "interested" );
+    listofwords.push_back( "interesting" );
+    listofwords.push_back( "internal" );
+    listofwords.push_back( "international" );
+    listofwords.push_back( "internet" );
+    listofwords.push_back( "interpret" );
+    listofwords.push_back( "interpretation" );
+    listofwords.push_back( "intervention" );
+    listofwords.push_back( "interview" );
+    listofwords.push_back( "introduce" );
+    listofwords.push_back( "introduction" );
+    listofwords.push_back( "invasion" );
+    listofwords.push_back( "investigate" );
+    listofwords.push_back( "investigation" );
+    listofwords.push_back( "investigator" );
+    listofwords.push_back( "investment" );
+    listofwords.push_back( "investor" );
+    listofwords.push_back( "involve" );
+    listofwords.push_back( "involved" );
+    listofwords.push_back( "involvement" );
+    listofwords.push_back( "islamic" );
+    listofwords.push_back( "israeli" );
+    listofwords.push_back( "italian" );
+    listofwords.push_back( "japanese" );
+    listofwords.push_back( "journal" );
+    listofwords.push_back( "journalist" );
+    listofwords.push_back( "journey" );
+    listofwords.push_back( "judgment" );
+    listofwords.push_back( "justice" );
+    listofwords.push_back( "justify" );
+    listofwords.push_back( "killing" );
+    listofwords.push_back( "kitchen" );
+    listofwords.push_back( "knowledge" );
+    listofwords.push_back( "laboratory" );
+    listofwords.push_back( "landscape" );
+    listofwords.push_back( "language" );
+    listofwords.push_back( "largely" );
+    listofwords.push_back( "lawsuit" );
+    listofwords.push_back( "leadership" );
+    listofwords.push_back( "leading" );
+    listofwords.push_back( "learning" );
+    listofwords.push_back( "leather" );
+    listofwords.push_back( "legislation" );
+    listofwords.push_back( "legitimate" );
+    listofwords.push_back( "liberal" );
+    listofwords.push_back( "library" );
+    listofwords.push_back( "license" );
+    listofwords.push_back( "lifestyle" );
+    listofwords.push_back( "lifetime" );
+    listofwords.push_back( "limitation" );
+    listofwords.push_back( "limited" );
+    listofwords.push_back( "literally" );
+    listofwords.push_back( "literary" );
+    listofwords.push_back( "literature" );
+    listofwords.push_back( "location" );
+    listofwords.push_back( "long-term" );
+    listofwords.push_back( "machine" );
+    listofwords.push_back( "magazine" );
+    listofwords.push_back( "maintain" );
+    listofwords.push_back( "maintenance" );
+    listofwords.push_back( "majority" );
+    listofwords.push_back( "management" );
+    listofwords.push_back( "manager" );
+    listofwords.push_back( "manufacturer" );
+    listofwords.push_back( "manufacturing" );
+    listofwords.push_back( "marketing" );
+    listofwords.push_back( "marriage" );
+    listofwords.push_back( "married" );
+    listofwords.push_back( "massive" );
+    listofwords.push_back( "material" );
+    listofwords.push_back( "meaning" );
+    listofwords.push_back( "meanwhile" );
+    listofwords.push_back( "measure" );
+    listofwords.push_back( "measurement" );
+    listofwords.push_back( "mechanism" );
+    listofwords.push_back( "medical" );
+    listofwords.push_back( "medication" );
+    listofwords.push_back( "medicine" );
+    listofwords.push_back( "meeting" );
+    listofwords.push_back( "membership" );
+    listofwords.push_back( "mention" );
+    listofwords.push_back( "message" );
+    listofwords.push_back( "mexican" );
+    listofwords.push_back( "military" );
+    listofwords.push_back( "million" );
+    listofwords.push_back( "minister" );
+    listofwords.push_back( "minority" );
+    listofwords.push_back( "miracle" );
+    listofwords.push_back( "missile" );
+    listofwords.push_back( "mission" );
+    listofwords.push_back( "mistake" );
+    listofwords.push_back( "mixture" );
+    listofwords.push_back( "moderate" );
+    listofwords.push_back( "monitor" );
+    listofwords.push_back( "moreover" );
+    listofwords.push_back( "morning" );
+    listofwords.push_back( "mortgage" );
+    listofwords.push_back( "motivation" );
+    listofwords.push_back( "mountain" );
+    listofwords.push_back( "movement" );
+    listofwords.push_back( "multiple" );
+    listofwords.push_back( "musical" );
+    listofwords.push_back( "musician" );
+    listofwords.push_back( "mystery" );
+    listofwords.push_back( "narrative" );
+    listofwords.push_back( "national" );
+    listofwords.push_back( "natural" );
+    listofwords.push_back( "naturally" );
+    listofwords.push_back( "necessarily" );
+    listofwords.push_back( "necessary" );
+    listofwords.push_back( "negative" );
+    listofwords.push_back( "negotiate" );
+    listofwords.push_back( "negotiation" );
+    listofwords.push_back( "neighbor" );
+    listofwords.push_back( "neighborhood" );
+    listofwords.push_back( "neither" );
+    listofwords.push_back( "nervous" );
+    listofwords.push_back( "network" );
+    listofwords.push_back( "nevertheless" );
+    listofwords.push_back( "newspaper" );
+    listofwords.push_back( "nomination" );
+    listofwords.push_back( "nonetheless" );
+    listofwords.push_back( "normally" );
+    listofwords.push_back( "northern" );
+    listofwords.push_back( "nothing" );
+    listofwords.push_back( "nowhere" );
+    listofwords.push_back( "nuclear" );
+    listofwords.push_back( "numerous" );
+    listofwords.push_back( "objective" );
+    listofwords.push_back( "obligation" );
+    listofwords.push_back( "observation" );
+    listofwords.push_back( "observe" );
+    listofwords.push_back( "observer" );
+    listofwords.push_back( "obvious" );
+    listofwords.push_back( "obviously" );
+    listofwords.push_back( "occasion" );
+    listofwords.push_back( "occasionally" );
+    listofwords.push_back( "occupation" );
+    listofwords.push_back( "offense" );
+    listofwords.push_back( "offensive" );
+    listofwords.push_back( "officer" );
+    listofwords.push_back( "official" );
+    listofwords.push_back( "olympic" );
+    listofwords.push_back( "ongoing" );
+    listofwords.push_back( "opening" );
+    listofwords.push_back( "operate" );
+    listofwords.push_back( "operating" );
+    listofwords.push_back( "operation" );
+    listofwords.push_back( "operator" );
+    listofwords.push_back( "opinion" );
+    listofwords.push_back( "opponent" );
+    listofwords.push_back( "opportunity" );
+    listofwords.push_back( "opposite" );
+    listofwords.push_back( "opposition" );
+    listofwords.push_back( "ordinary" );
+    listofwords.push_back( "organic" );
+    listofwords.push_back( "organization" );
+    listofwords.push_back( "organize" );
+    listofwords.push_back( "orientation" );
+    listofwords.push_back( "original" );
+    listofwords.push_back( "originally" );
+    listofwords.push_back( "otherwise" );
+    listofwords.push_back( "ourselves" );
+    listofwords.push_back( "outcome" );
+    listofwords.push_back( "outside" );
+    listofwords.push_back( "overall" );
+    listofwords.push_back( "overcome" );
+    listofwords.push_back( "overlook" );
+    listofwords.push_back( "package" );
+    listofwords.push_back( "painful" );
+    listofwords.push_back( "painter" );
+    listofwords.push_back( "painting" );
+    listofwords.push_back( "palestinian" );
+    listofwords.push_back( "parking" );
+    listofwords.push_back( "participant" );
+    listofwords.push_back( "participate" );
+    listofwords.push_back( "participation" );
+    listofwords.push_back( "particular" );
+    listofwords.push_back( "particularly" );
+    listofwords.push_back( "partner" );
+    listofwords.push_back( "partnership" );
+    listofwords.push_back( "passage" );
+    listofwords.push_back( "passenger" );
+    listofwords.push_back( "passion" );
+    listofwords.push_back( "patient" );
+    listofwords.push_back( "pattern" );
+    listofwords.push_back( "payment" );
+    listofwords.push_back( "penalty" );
+    listofwords.push_back( "perceive" );
+    listofwords.push_back( "percentage" );
+    listofwords.push_back( "perception" );
+    listofwords.push_back( "perfect" );
+    listofwords.push_back( "perfectly" );
+    listofwords.push_back( "perform" );
+    listofwords.push_back( "performance" );
+    listofwords.push_back( "perhaps" );
+    listofwords.push_back( "permanent" );
+    listofwords.push_back( "permission" );
+    listofwords.push_back( "personal" );
+    listofwords.push_back( "personality" );
+    listofwords.push_back( "personally" );
+    listofwords.push_back( "personnel" );
+    listofwords.push_back( "perspective" );
+    listofwords.push_back( "persuade" );
+    listofwords.push_back( "phenomenon" );
+    listofwords.push_back( "philosophy" );
+    listofwords.push_back( "photograph" );
+    listofwords.push_back( "photographer" );
+    listofwords.push_back( "physical" );
+    listofwords.push_back( "physically" );
+    listofwords.push_back( "physician" );
+    listofwords.push_back( "picture" );
+    listofwords.push_back( "planning" );
+    listofwords.push_back( "plastic" );
+    listofwords.push_back( "platform" );
+    listofwords.push_back( "pleasure" );
+    listofwords.push_back( "political" );
+    listofwords.push_back( "politically" );
+    listofwords.push_back( "politician" );
+    listofwords.push_back( "politics" );
+    listofwords.push_back( "pollution" );
+    listofwords.push_back( "popular" );
+    listofwords.push_back( "population" );
+    listofwords.push_back( "portion" );
+    listofwords.push_back( "portrait" );
+    listofwords.push_back( "portray" );
+    listofwords.push_back( "position" );
+    listofwords.push_back( "positive" );
+    listofwords.push_back( "possess" );
+    listofwords.push_back( "possibility" );
+    listofwords.push_back( "possible" );
+    listofwords.push_back( "possibly" );
+    listofwords.push_back( "potential" );
+    listofwords.push_back( "potentially" );
+    listofwords.push_back( "poverty" );
+    listofwords.push_back( "powerful" );
+    listofwords.push_back( "practical" );
+    listofwords.push_back( "practice" );
+    listofwords.push_back( "precisely" );
+    listofwords.push_back( "predict" );
+    listofwords.push_back( "preference" );
+    listofwords.push_back( "pregnancy" );
+    listofwords.push_back( "pregnant" );
+    listofwords.push_back( "preparation" );
+    listofwords.push_back( "prepare" );
+    listofwords.push_back( "prescription" );
+    listofwords.push_back( "presence" );
+    listofwords.push_back( "present" );
+    listofwords.push_back( "presentation" );
+    listofwords.push_back( "preserve" );
+    listofwords.push_back( "president" );
+    listofwords.push_back( "presidential" );
+    listofwords.push_back( "pressure" );
+    listofwords.push_back( "pretend" );
+    listofwords.push_back( "prevent" );
+    listofwords.push_back( "previous" );
+    listofwords.push_back( "previously" );
+    listofwords.push_back( "primarily" );
+    listofwords.push_back( "primary" );
+    listofwords.push_back( "principal" );
+    listofwords.push_back( "principle" );
+    listofwords.push_back( "priority" );
+    listofwords.push_back( "prisoner" );
+    listofwords.push_back( "privacy" );
+    listofwords.push_back( "private" );
+    listofwords.push_back( "probably" );
+    listofwords.push_back( "problem" );
+    listofwords.push_back( "procedure" );
+    listofwords.push_back( "proceed" );
+    listofwords.push_back( "process" );
+    listofwords.push_back( "produce" );
+    listofwords.push_back( "producer" );
+    listofwords.push_back( "product" );
+    listofwords.push_back( "production" );
+    listofwords.push_back( "profession" );
+    listofwords.push_back( "professional" );
+    listofwords.push_back( "professor" );
+    listofwords.push_back( "profile" );
+    listofwords.push_back( "program" );
+    listofwords.push_back( "progress" );
+    listofwords.push_back( "project" );
+    listofwords.push_back( "prominent" );
+    listofwords.push_back( "promise" );
+    listofwords.push_back( "promote" );
+    listofwords.push_back( "properly" );
+    listofwords.push_back( "property" );
+    listofwords.push_back( "proportion" );
+    listofwords.push_back( "proposal" );
+    listofwords.push_back( "propose" );
+    listofwords.push_back( "proposed" );
+    listofwords.push_back( "prosecutor" );
+    listofwords.push_back( "prospect" );
+    listofwords.push_back( "protect" );
+    listofwords.push_back( "protection" );
+    listofwords.push_back( "protein" );
+    listofwords.push_back( "protest" );
+    listofwords.push_back( "provide" );
+    listofwords.push_back( "provider" );
+    listofwords.push_back( "province" );
+    listofwords.push_back( "provision" );
+    listofwords.push_back( "psychological" );
+    listofwords.push_back( "psychologist" );
+    listofwords.push_back( "psychology" );
+    listofwords.push_back( "publication" );
+    listofwords.push_back( "publicly" );
+    listofwords.push_back( "publish" );
+    listofwords.push_back( "publisher" );
+    listofwords.push_back( "punishment" );
+    listofwords.push_back( "purchase" );
+    listofwords.push_back( "purpose" );
+    listofwords.push_back( "qualify" );
+    listofwords.push_back( "quality" );
+    listofwords.push_back( "quarter" );
+    listofwords.push_back( "quarterback" );
+    listofwords.push_back( "question" );
+    listofwords.push_back( "quickly" );
+    listofwords.push_back( "quietly" );
+    listofwords.push_back( "radical" );
+    listofwords.push_back( "rapidly" );
+    listofwords.push_back( "reaction" );
+    listofwords.push_back( "reading" );
+    listofwords.push_back( "reality" );
+    listofwords.push_back( "realize" );
+    listofwords.push_back( "reasonable" );
+    listofwords.push_back( "receive" );
+    listofwords.push_back( "recently" );
+    listofwords.push_back( "recognition" );
+    listofwords.push_back( "recognize" );
+    listofwords.push_back( "recommend" );
+    listofwords.push_back( "recommendation" );
+    listofwords.push_back( "recording" );
+    listofwords.push_back( "recover" );
+    listofwords.push_back( "recovery" );
+    listofwords.push_back( "recruit" );
+    listofwords.push_back( "reduction" );
+    listofwords.push_back( "reference" );
+    listofwords.push_back( "reflect" );
+    listofwords.push_back( "reflection" );
+    listofwords.push_back( "refugee" );
+    listofwords.push_back( "regarding" );
+    listofwords.push_back( "regardless" );
+    listofwords.push_back( "regional" );
+    listofwords.push_back( "register" );
+    listofwords.push_back( "regular" );
+    listofwords.push_back( "regularly" );
+    listofwords.push_back( "regulate" );
+    listofwords.push_back( "regulation" );
+    listofwords.push_back( "reinforce" );
+    listofwords.push_back( "relation" );
+    listofwords.push_back( "relationship" );
+    listofwords.push_back( "relative" );
+    listofwords.push_back( "relatively" );
+    listofwords.push_back( "release" );
+    listofwords.push_back( "relevant" );
+    listofwords.push_back( "religion" );
+    listofwords.push_back( "religious" );
+    listofwords.push_back( "remaining" );
+    listofwords.push_back( "remarkable" );
+    listofwords.push_back( "remember" );
+    listofwords.push_back( "repeatedly" );
+    listofwords.push_back( "replace" );
+    listofwords.push_back( "reporter" );
+    listofwords.push_back( "represent" );
+    listofwords.push_back( "representation" );
+    listofwords.push_back( "representative" );
+    listofwords.push_back( "republican" );
+    listofwords.push_back( "reputation" );
+    listofwords.push_back( "request" );
+    listofwords.push_back( "require" );
+    listofwords.push_back( "requirement" );
+    listofwords.push_back( "research" );
+    listofwords.push_back( "researcher" );
+    listofwords.push_back( "resemble" );
+    listofwords.push_back( "reservation" );
+    listofwords.push_back( "resident" );
+    listofwords.push_back( "resistance" );
+    listofwords.push_back( "resolution" );
+    listofwords.push_back( "resolve" );
+    listofwords.push_back( "resource" );
+    listofwords.push_back( "respect" );
+    listofwords.push_back( "respond" );
+    listofwords.push_back( "respondent" );
+    listofwords.push_back( "response" );
+    listofwords.push_back( "responsibility" );
+    listofwords.push_back( "responsible" );
+    listofwords.push_back( "restaurant" );
+    listofwords.push_back( "restore" );
+    listofwords.push_back( "restriction" );
+    listofwords.push_back( "retirement" );
+    listofwords.push_back( "revenue" );
+    listofwords.push_back( "revolution" );
+    listofwords.push_back( "romantic" );
+    listofwords.push_back( "roughly" );
+    listofwords.push_back( "routine" );
+    listofwords.push_back( "running" );
+    listofwords.push_back( "russian" );
+    listofwords.push_back( "sanction" );
+    listofwords.push_back( "satellite" );
+    listofwords.push_back( "satisfaction" );
+    listofwords.push_back( "satisfy" );
+    listofwords.push_back( "scandal" );
+    listofwords.push_back( "scenario" );
+    listofwords.push_back( "schedule" );
+    listofwords.push_back( "scholar" );
+    listofwords.push_back( "scholarship" );
+    listofwords.push_back( "science" );
+    listofwords.push_back( "scientific" );
+    listofwords.push_back( "scientist" );
+    listofwords.push_back( "secretary" );
+    listofwords.push_back( "section" );
+    listofwords.push_back( "security" );
+    listofwords.push_back( "segment" );
+    listofwords.push_back( "selection" );
+    listofwords.push_back( "senator" );
+    listofwords.push_back( "sensitive" );
+    listofwords.push_back( "sentence" );
+    listofwords.push_back( "separate" );
+    listofwords.push_back( "sequence" );
+    listofwords.push_back( "serious" );
+    listofwords.push_back( "seriously" );
+    listofwords.push_back( "service" );
+    listofwords.push_back( "session" );
+    listofwords.push_back( "setting" );
+    listofwords.push_back( "settlement" );
+    listofwords.push_back( "several" );
+    listofwords.push_back( "shelter" );
+    listofwords.push_back( "shooting" );
+    listofwords.push_back( "shopping" );
+    listofwords.push_back( "shortly" );
+    listofwords.push_back( "shoulder" );
+    listofwords.push_back( "significance" );
+    listofwords.push_back( "significant" );
+    listofwords.push_back( "significantly" );
+    listofwords.push_back( "silence" );
+    listofwords.push_back( "similar" );
+    listofwords.push_back( "similarly" );
+    listofwords.push_back( "situation" );
+    listofwords.push_back( "slightly" );
+    listofwords.push_back( "so-called" );
+    listofwords.push_back( "society" );
+    listofwords.push_back( "software" );
+    listofwords.push_back( "soldier" );
+    listofwords.push_back( "solution" );
+    listofwords.push_back( "somebody" );
+    listofwords.push_back( "somehow" );
+    listofwords.push_back( "someone" );
+    listofwords.push_back( "something" );
+    listofwords.push_back( "sometimes" );
+    listofwords.push_back( "somewhat" );
+    listofwords.push_back( "somewhere" );
+    listofwords.push_back( "sophisticated" );
+    listofwords.push_back( "southern" );
+    listofwords.push_back( "spanish" );
+    listofwords.push_back( "speaker" );
+    listofwords.push_back( "special" );
+    listofwords.push_back( "specialist" );
+    listofwords.push_back( "species" );
+    listofwords.push_back( "specific" );
+    listofwords.push_back( "specifically" );
+    listofwords.push_back( "spending" );
+    listofwords.push_back( "spiritual" );
+    listofwords.push_back( "spokesman" );
+    listofwords.push_back( "squeeze" );
+    listofwords.push_back( "stability" );
+    listofwords.push_back( "standard" );
+    listofwords.push_back( "standing" );
+    listofwords.push_back( "statement" );
+    listofwords.push_back( "station" );
+    listofwords.push_back( "statistics" );
+    listofwords.push_back( "stomach" );
+    listofwords.push_back( "storage" );
+    listofwords.push_back( "straight" );
+    listofwords.push_back( "strange" );
+    listofwords.push_back( "stranger" );
+    listofwords.push_back( "strategic" );
+    listofwords.push_back( "strategy" );
+    listofwords.push_back( "strength" );
+    listofwords.push_back( "strengthen" );
+    listofwords.push_back( "stretch" );
+    listofwords.push_back( "strongly" );
+    listofwords.push_back( "structure" );
+    listofwords.push_back( "struggle" );
+    listofwords.push_back( "student" );
+    listofwords.push_back( "subject" );
+    listofwords.push_back( "subsequent" );
+    listofwords.push_back( "substance" );
+    listofwords.push_back( "substantial" );
+    listofwords.push_back( "succeed" );
+    listofwords.push_back( "success" );
+    listofwords.push_back( "successful" );
+    listofwords.push_back( "successfully" );
+    listofwords.push_back( "suddenly" );
+    listofwords.push_back( "sufficient" );
+    listofwords.push_back( "suggest" );
+    listofwords.push_back( "suggestion" );
+    listofwords.push_back( "suicide" );
+    listofwords.push_back( "support" );
+    listofwords.push_back( "supporter" );
+    listofwords.push_back( "suppose" );
+    listofwords.push_back( "supposed" );
+    listofwords.push_back( "supreme" );
+    listofwords.push_back( "surface" );
+    listofwords.push_back( "surgery" );
+    listofwords.push_back( "surprise" );
+    listofwords.push_back( "surprised" );
+    listofwords.push_back( "surprising" );
+    listofwords.push_back( "surprisingly" );
+    listofwords.push_back( "surround" );
+    listofwords.push_back( "survival" );
+    listofwords.push_back( "survive" );
+    listofwords.push_back( "survivor" );
+    listofwords.push_back( "suspect" );
+    listofwords.push_back( "sustain" );
+    listofwords.push_back( "symptom" );
+    listofwords.push_back( "tablespoon" );
+    listofwords.push_back( "taxpayer" );
+    listofwords.push_back( "teacher" );
+    listofwords.push_back( "teaching" );
+    listofwords.push_back( "teaspoon" );
+    listofwords.push_back( "technical" );
+    listofwords.push_back( "technique" );
+    listofwords.push_back( "technology" );
+    listofwords.push_back( "teenager" );
+    listofwords.push_back( "telephone" );
+    listofwords.push_back( "telescope" );
+    listofwords.push_back( "television" );
+    listofwords.push_back( "temperature" );
+    listofwords.push_back( "temporary" );
+    listofwords.push_back( "tendency" );
+    listofwords.push_back( "tension" );
+    listofwords.push_back( "terrible" );
+    listofwords.push_back( "territory" );
+    listofwords.push_back( "terrorism" );
+    listofwords.push_back( "terrorist" );
+    listofwords.push_back( "testify" );
+    listofwords.push_back( "testimony" );
+    listofwords.push_back( "testing" );
+    listofwords.push_back( "theater" );
+    listofwords.push_back( "themselves" );
+    listofwords.push_back( "therapy" );
+    listofwords.push_back( "therefore" );
+    listofwords.push_back( "thinking" );
+    listofwords.push_back( "thought" );
+    listofwords.push_back( "thousand" );
+    listofwords.push_back( "threaten" );
+    listofwords.push_back( "through" );
+    listofwords.push_back( "throughout" );
+    listofwords.push_back( "tobacco" );
+    listofwords.push_back( "together" );
+    listofwords.push_back( "tomorrow" );
+    listofwords.push_back( "tonight" );
+    listofwords.push_back( "totally" );
+    listofwords.push_back( "tourist" );
+    listofwords.push_back( "tournament" );
+    listofwords.push_back( "towards" );
+    listofwords.push_back( "tradition" );
+    listofwords.push_back( "traditional" );
+    listofwords.push_back( "traffic" );
+    listofwords.push_back( "tragedy" );
+    listofwords.push_back( "training" );
+    listofwords.push_back( "transfer" );
+    listofwords.push_back( "transform" );
+    listofwords.push_back( "transformation" );
+    listofwords.push_back( "transition" );
+    listofwords.push_back( "translate" );
+    listofwords.push_back( "transportation" );
+    listofwords.push_back( "treatment" );
+    listofwords.push_back( "tremendous" );
+    listofwords.push_back( "trouble" );
+    listofwords.push_back( "typical" );
+    listofwords.push_back( "typically" );
+    listofwords.push_back( "ultimate" );
+    listofwords.push_back( "ultimately" );
+    listofwords.push_back( "undergo" );
+    listofwords.push_back( "understand" );
+    listofwords.push_back( "understanding" );
+    listofwords.push_back( "unfortunately" );
+    listofwords.push_back( "uniform" );
+    listofwords.push_back( "universal" );
+    listofwords.push_back( "universe" );
+    listofwords.push_back( "university" );
+    listofwords.push_back( "unknown" );
+    listofwords.push_back( "unlikely" );
+    listofwords.push_back( "unusual" );
+    listofwords.push_back( "usually" );
+    listofwords.push_back( "utility" );
+    listofwords.push_back( "vacation" );
+    listofwords.push_back( "valuable" );
+    listofwords.push_back( "variable" );
+    listofwords.push_back( "variation" );
+    listofwords.push_back( "variety" );
+    listofwords.push_back( "various" );
+    listofwords.push_back( "vegetable" );
+    listofwords.push_back( "vehicle" );
+    listofwords.push_back( "venture" );
+    listofwords.push_back( "version" );
+    listofwords.push_back( "veteran" );
+    listofwords.push_back( "victory" );
+    listofwords.push_back( "village" );
+    listofwords.push_back( "violate" );
+    listofwords.push_back( "violation" );
+    listofwords.push_back( "violence" );
+    listofwords.push_back( "violent" );
+    listofwords.push_back( "virtually" );
+    listofwords.push_back( "visible" );
+    listofwords.push_back( "visitor" );
+    listofwords.push_back( "volunteer" );
+    listofwords.push_back( "vulnerable" );
+    listofwords.push_back( "warning" );
+    listofwords.push_back( "wealthy" );
+    listofwords.push_back( "weather" );
+    listofwords.push_back( "wedding" );
+    listofwords.push_back( "weekend" );
+    listofwords.push_back( "welcome" );
+    listofwords.push_back( "welfare" );
+    listofwords.push_back( "western" );
+    listofwords.push_back( "whatever" );
+    listofwords.push_back( "whenever" );
+    listofwords.push_back( "whereas" );
+    listofwords.push_back( "whether" );
+    listofwords.push_back( "whisper" );
+    listofwords.push_back( "willing" );
+    listofwords.push_back( "withdraw" );
+    listofwords.push_back( "without" );
+    listofwords.push_back( "witness" );
+    listofwords.push_back( "wonderful" );
+    listofwords.push_back( "working" );
+    listofwords.push_back( "workshop" );
+    listofwords.push_back( "worried" );
+    listofwords.push_back( "writing" );
+    listofwords.push_back( "yesterday" );
+    listofwords.push_back( "yourself" );
 
-};
 
-     for(int i=0;i<2290;i++)
-     {
-         listofwords.push_back(words[i]);
-     }
 
     rand:
     int random=rand()%listofwords.size();
-    generatedword=words[random];
+    generatedword=listofwords[random];
     wordlength=generatedword.length();
 
     if(level==1)
