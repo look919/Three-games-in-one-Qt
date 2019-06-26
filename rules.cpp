@@ -26,7 +26,7 @@ void Rules::on_guessMyWordButton_clicked()
       "If u are sure of your answer, fill the field on your right, but remember you have only one shot! "
       "In second round you create your own word, but there are some rules, "
       "it must contain from 5 to 12 letters and you cannot use proper names, after that its computer time to guess. "
-      "Wins a person or machine who answered correctly and used fewer letters. Goodluck!");
+      "Wins a person or machine who answers correctly and uses fewer letters. Goodluck!");
     ui->textEdit->setAlignment(Qt::AlignCenter);
 }
 

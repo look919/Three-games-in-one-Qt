@@ -65,7 +65,6 @@ private:
     QString randchar;
     bool letterexist;
     int letterposition;
-    bool wordlisthaslessthantenelements;
 
     int playerscore;
     int computerscore;

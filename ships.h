@@ -17,7 +17,7 @@ public:
     explicit Ships(QWidget *parent = nullptr);
     ~Ships();
 
-private slots:          //buttons/difficulty level
+private:          //buttons/difficulty level
     void on_actionButton_clicked();
     void disable_your_buttons();
     void disable_cpu_buttons();
@@ -39,6 +39,8 @@ private slots:          //buttons/difficulty level
     void winscreen();
     void cpuwinscreen();
 
+    void on_computerbutton_clicked(QPushButton *p1);
+     private slots:
     //Player ships
     void setshipsbuttonsclicked(QPushButton *p1);
     void on_A1_clicked();
@@ -79,7 +81,6 @@ private slots:          //buttons/difficulty level
     void on_F6_clicked();
 
     //CPU ships
-    void on_computerbutton_clicked(QPushButton *p1);
     void on_C_A1_clicked();
     void on_C_B1_clicked();
     void on_C_C1_clicked();
