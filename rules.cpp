@@ -44,10 +44,10 @@ void Rules::on_shipsButton_clicked()
 void Rules::on_trainYourMemoryButton_clicked()
 {
     ui->textEdit->clear();
-    ui->textEdit->setText("It's simply game that bases on memoring. On the beggining you observe changes of color on buttons, "
-                          "then you have to repeat thatcombination in the same order, scheme of that changes in each round. "
+    ui->textEdit->setText("It's simply game that bases on memorising. On the beggining you observe changes of color on buttons, "
+                          "then you have to repeat that combination in the same order. Scheme of that changes in each round. "
                           "In the first round you have to remember 3 changes to green, then one more with each next round. "
-                          "After fourth round button can change it's color to red, that doesn't count to the combination. "
+                          "After third round button can change it's color to red, that doesn't count to the combination. "
                           "How far can you go? Goodluck!");
     ui->textEdit->setAlignment(Qt::AlignCenter);
 }

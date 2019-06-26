@@ -396,7 +396,7 @@ void Ships::cpushot()
                 break;
             }
         }
-        else if(difficulty==0 && numberOfShots<10)   //else if to easy lvl- worse shooting
+        else if(difficulty==0 && numberOfShots<9)   //else if to easy lvl- worse shooting
         {
             if( Cord_bigger1 == computershots.at(i) || Cord_lower2== computershots.at(i) )
             {
@@ -472,7 +472,7 @@ void Ships::cpushot()
         {
             if(counter<4)
             {
-                numberOfShots++;
+                numberOfShots+=2;
                 counter=10;
                 for(int i=0;i<4;i++)
                 {
@@ -517,7 +517,7 @@ void Ships::cpushot()
         {
             if(counter<4)
             {
-                numberOfShots++;
+                numberOfShots+=2;
                 counter=10;
                 for(int i=0;i<4;i++)
                 {
@@ -656,7 +656,8 @@ void Ships::winscreen()
 {
     if(playerscore==9)
     {
-        QMessageBox::information(this,"You WON","Congratulation, you are the best"                                           " pirate that have ever swam of this ocean",QMessageBox::Ok);
+        QMessageBox::information(this,"You WON","Congratulation, you are the best"
+                                                " pirate that have ever swam of this ocean",QMessageBox::Ok);
         ui->actionButton->show();
         disable_cpu_buttons();
         ui->info->hide();
@@ -689,9 +690,63 @@ void Ships::setshipsbuttonsclicked(QPushButton *p1)
     QString cords=p1->objectName();
     playerships.push_back(cords);
 
-    if(needed==4) p1->setStyleSheet("background-color:#80f442; border:1px solid #0b253d;");
-    else if(needed==3) p1->setStyleSheet("background-color:#80f442; border:1px solid #d60835;");
-    else if(needed==2) p1->setStyleSheet("background-color:#80f442; border:1px solid #0a88ff;");
+    QString firstCordLeft;
+    QString firstCordRight;
+    QString secondCordLeft;
+    QString secondCordRight;
+
+    if(p1->objectName()[0]=="A"){                       //THAT fragment is needed to block buttons that are not in side of ship pieces
+        firstCordLeft = 'x';
+        firstCordRight= 'B';
+    }else if(p1->objectName()[0]=="B"){
+        firstCordLeft = 'A';
+        firstCordRight= 'C';
+    }else if(p1->objectName()[0]=="C"){
+        firstCordLeft = 'B';
+        firstCordRight= 'D';
+    }else if(p1->objectName()[0]=="D"){
+        firstCordLeft = 'C';
+        firstCordRight= 'E';
+    }else if(p1->objectName()[0]=="E"){
+        firstCordLeft = 'D';
+        firstCordRight= 'F';
+    }else if(p1->objectName()[0]=="F"){
+        firstCordLeft = 'E';
+        firstCordRight= 'x';
+    }
+    if(p1->objectName()[1]=="1"){
+        secondCordLeft = 'x';
+        secondCordRight= '2';
+    }else if(p1->objectName()[0]=="2"){
+        secondCordLeft = '1';
+        secondCordRight= '3';
+    }else if(p1->objectName()[0]=="3"){
+        secondCordLeft = '2';
+        secondCordRight= '4';
+    }else if(p1->objectName()[0]=="4"){
+        secondCordLeft = '3';
+        secondCordRight= '5';
+    }else if(p1->objectName()[0]=="5"){
+        secondCordLeft = '4';
+        secondCordRight= '6';
+    }else if(p1->objectName()[0]=="6"){
+        secondCordLeft = '5';
+        secondCordRight= 'x';
+    }
+    QString button1 = firstCordLeft+secondCordRight;
+    QString button2 = firstCordLeft+secondCordLeft;
+    QString button3 = firstCordRight+secondCordLeft;
+    QString button4 = firstCordRight+secondCordRight;
+
+    if(needed==4) {
+            p1->setStyleSheet("background-color:#80f442; border:1px solid #0b253d;");
+    }
+    else if(needed==3) {
+        p1->setStyleSheet("background-color:#80f442; border:1px solid #d60835;");
+    }
+    else if(needed==2){
+        p1->setStyleSheet("background-color:#80f442; border:1px solid #0a88ff;");
+    }
     counter++;
     if(counter==needed)
     {
@@ -1188,6 +1243,7 @@ void Ships::enable_your_buttons()
     ui->F5->setEnabled(true);
     ui->F6->setEnabled(true);
 }
+
 void Ships::enable_cpu_buttons()
 {
     ui->C_A1->setEnabled(true);
