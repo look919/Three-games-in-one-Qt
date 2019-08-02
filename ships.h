@@ -19,25 +19,12 @@ public:
 
 private slots:          //buttons/difficulty level
     void on_actionButton_clicked();
-    void disable_your_buttons();
-    void disable_cpu_buttons();
-    void enable_your_buttons();
-    void enable_cpu_buttons();
-    void disable_shot_buttons();
-    void disable_playerships_buttons();
-    void delay(int n);
+
     void on_easylevel_clicked();
     void on_normallevel_clicked();
     void on_hardlevel_clicked();
 
-    void generatecomputerships();
-    void createcomputerships(int n);
 
-    void cpushot();
-    void changecolorifhit();
-
-    void winscreen();
-    void cpuwinscreen();
 
     //Player ships
     void setshipsbuttonsclicked(QPushButton *p1);
@@ -121,6 +108,26 @@ private slots:          //buttons/difficulty level
 private:
     Ui::Ships *ui;
 
+    void generatecomputerships();
+    void createcomputerships(int n);
+
+    void disable_your_buttons();
+    void disable_cpu_buttons();
+    void enable_your_buttons();
+    void enable_cpu_buttons();
+    void disable_shot_buttons();
+    void disable_playerships_buttons();
+    void delay(int n);
+
+    void cpushot();
+    void changecolorifhit();
+
+    void winscreen();
+    void cpuwinscreen();
+
+    void convertStringToButton(QString cord);
+    QPushButton *requiredButton;
+
     int number_of_action; //counting number of pressing actionButton
     int difficulty;
 
@@ -138,13 +145,27 @@ private:
     int cord1;  //firsthalfofcoordinates
     int cord2;  //secondhalfofcoordinates
     int numberOfShots;
+
     QString cord1s; //the same in Qstring
     QString cord2s; //the same in Qstring
     QString cord;   //coordinates connected/united;
 
+
     QVector <QString> computerships;
     QVector <QString> savedshipselements;
     QVector <QString> playerships;
+    QPushButton *rememeberedPlayerShip;
+
+    void locateButtons(QString button);
+    //variables needed to coordinate placing ships
+    QString left;
+    QString top;
+    QString bottom;
+    QString right;
+    QString buttonTop;
+    QString buttonBottom;
+    QString buttonLeft;
+    QString buttonRight;
 
     QVector <QString> computershots;
     QVector <QString> playershots;

@@ -51,54 +51,6 @@ void Ships::on_actionButton_clicked()
 {
     number_of_action++;
 
-    if(number_of_action==7)
-    {
-        this->close();
-    }
-    if(number_of_action==6)
-    {
-        enable_cpu_buttons();
-        disable_shot_buttons();
-        ui->actionButton->hide();
-        ui->info->setText("You start, goodluck!");
-    }
-    if(number_of_action==5)
-    {
-        counter=10;      //Making counter variable useful for CPU shots inteligence
-        ui->actionButton->setText("Start the game");
-        ui->info->setText("Okay, thats showtime, prepare the cannons!");
-    }
-    if(number_of_action==4)
-    {
-        ui->actionButton->setEnabled(false);
-        needed=2;
-        enable_your_buttons();
-        disable_playerships_buttons();
-        ui->actionButton->setText("Set ship");
-        ui->info->setText("Set your two-level ship on the see on your left, then press button bellow");
-    }
-    if(number_of_action==3)
-    {
-        ui->actionButton->setEnabled(false);
-        needed=3;
-        enable_your_buttons();
-        disable_playerships_buttons();
-        ui->actionButton->setText("Set ship");
-        ui->info->setText("Set your three-level ship on the see on your left, then press button bellow");
-    }
-
-    if(number_of_action==2)
-    {
-        ui->actionButton->setEnabled(false);
-        needed=4;
-        enable_your_buttons();
-        disable_playerships_buttons();
-        ui->actionButton->setText("Set ship");
-        ui->info->setText("Okay, now set your four-level ship on the see on your left, then press button bellow");
-        ui->easylevel->hide();
-        ui->normallevel->hide();
-        ui->hardlevel->hide();
-    }
     if(number_of_action==1)
     {
         ui->actionButton->hide();
@@ -114,6 +66,53 @@ void Ships::on_actionButton_clicked()
         generatecomputerships();
         createcomputerships(2);
     }
+    else if(number_of_action==2)
+    {
+        ui->actionButton->setEnabled(false);
+        needed=4;
+        enable_your_buttons();
+        disable_playerships_buttons();
+        ui->actionButton->setText("Set ship");
+        ui->info->setText("Okay, now set your four-level ship on the see on your left, then press button bellow");
+        ui->easylevel->hide();
+        ui->normallevel->hide();
+        ui->hardlevel->hide();
+    }
+    else if(number_of_action==3)
+    {
+        ui->actionButton->setEnabled(false);
+        needed=3;
+        enable_your_buttons();
+        disable_playerships_buttons();
+        ui->actionButton->setText("Set ship");
+        ui->info->setText("Set your three-level ship on the see on your left, then press button bellow");
+    }
+    else if(number_of_action==4)
+    {
+        ui->actionButton->setEnabled(false);
+        needed=2;
+        enable_your_buttons();
+        disable_playerships_buttons();
+        ui->actionButton->setText("Set ship");
+        ui->info->setText("Set your two-level ship on the see on your left, then press button bellow");
+    }
+    else if(number_of_action==5)
+    {
+        counter=10;      //Making counter variable - useful for CPU shots inteligence
+        ui->actionButton->setText("Start the game");
+        ui->info->setText("Okay, thats showtime, prepare the cannons!");
+    }
+    else if(number_of_action==6)
+    {
+        enable_cpu_buttons();
+        disable_shot_buttons();
+        ui->actionButton->hide();
+        ui->info->setText("You start, goodluck!");
+    }
+    else if(number_of_action==7)
+    {
+        this->close();
+    } 
 }
 
 
@@ -236,10 +235,7 @@ void Ships::createcomputerships(int n)
             }
             savedshipselements.clear();
         }
-    }
-
-
-
+}
 void Ships::cpushot()
 {
     delay(1);
@@ -338,7 +334,7 @@ void Ships::cpushot()
 
     for(int i=0; i<computershots.size();i++)
     {
-        if(difficulty==2 && numberOfShots<7)            // if its ahrd computer guesses better within 8 first tries
+        if(difficulty==2 && numberOfShots<6)            // if its ahrd computer guesses better within 8 first tries
         {
             if( Cord_bigger1 == computershots.at(i) || Cord_bigger2== computershots.at(i) )
             {
@@ -678,10 +674,89 @@ void Ships::cpuwinscreen()
     }
 }
 
+void Ships::convertStringToButton(QString crds)
+{
+    requiredButton = nullptr;
 
+    if(crds == ui->A1->objectName()) requiredButton = ui->A1;
+    else if(crds == ui->B1->objectName()) requiredButton = ui->B1;
+    else if(crds == ui->C1->objectName()) requiredButton = ui->C1;
+    else if(crds == ui->D1->objectName()) requiredButton = ui->D1;
+    else if(crds == ui->E1->objectName()) requiredButton = ui->E1;
+    else if(crds == ui->F1->objectName()) requiredButton = ui->F1;
+    else if(crds == ui->A2->objectName()) requiredButton = ui->A2;
+    else if(crds == ui->B2->objectName()) requiredButton = ui->B2;
+    else if(crds == ui->C2->objectName()) requiredButton = ui->C2;
+    else if(crds == ui->D2->objectName()) requiredButton = ui->D2;
+    else if(crds == ui->E2->objectName()) requiredButton = ui->E2;
+    else if(crds == ui->F2->objectName()) requiredButton = ui->F2;
+    else if(crds == ui->A3->objectName()) requiredButton = ui->A3;
+    else if(crds == ui->B3->objectName()) requiredButton = ui->B3;
+    else if(crds == ui->C3->objectName()) requiredButton = ui->C3;
+    else if(crds == ui->D3->objectName()) requiredButton = ui->D3;
+    else if(crds == ui->E3->objectName()) requiredButton = ui->E3;
+    else if(crds == ui->F3->objectName()) requiredButton = ui->F3;
+    else if(crds == ui->A4->objectName()) requiredButton = ui->A4;
+    else if(crds == ui->B4->objectName()) requiredButton = ui->B4;
+    else if(crds == ui->C4->objectName()) requiredButton = ui->C4;
+    else if(crds == ui->D4->objectName()) requiredButton = ui->D4;
+    else if(crds == ui->E4->objectName()) requiredButton = ui->E4;
+    else if(crds == ui->F4->objectName()) requiredButton = ui->F4;
+    else if(crds == ui->A5->objectName()) requiredButton = ui->A5;
+    else if(crds == ui->B5->objectName()) requiredButton = ui->B5;
+    else if(crds == ui->C5->objectName()) requiredButton = ui->C5;
+    else if(crds == ui->D5->objectName()) requiredButton = ui->D5;
+    else if(crds == ui->E5->objectName()) requiredButton = ui->E5;
+    else if(crds == ui->F5->objectName()) requiredButton = ui->F5;
+    else if(crds == ui->A6->objectName()) requiredButton = ui->A6;
+    else if(crds == ui->B6->objectName()) requiredButton = ui->B6;
+    else if(crds == ui->C6->objectName()) requiredButton = ui->C6;
+    else if(crds == ui->D6->objectName()) requiredButton = ui->D6;
+    else if(crds == ui->E6->objectName()) requiredButton = ui->E6;
+    else if(crds == ui->F6->objectName()) requiredButton = ui->F6;
+}
 
-
-
+void Ships::locateButtons(QString button)
+{
+    if(button[0]=="A"){                       //THAT fragment is needed to block buttons that are not in side of ship pieces
+        left = 'x';
+        right= 'B';
+    }else if(button[0]=="B"){
+        left = 'A';
+        right= 'C';
+    }else if(button[0]=="C"){
+        left = 'B';
+        right= 'D';
+    }else if(button[0]=="D"){
+        left = 'C';
+        right= 'E';
+    }else if(button[0]=="E"){
+        left = 'D';
+        right= 'F';
+    }else if(button[0]=="F"){
+        left = 'E';
+        right= 'x';
+    }
+    if(button[1]=="1"){
+        bottom = 'x';
+        top= '2';
+    }else if(button[1]=="2"){
+        bottom = '1';
+        top= '3';
+    }else if(button[1]=="3"){
+        bottom = '2';
+        top= '4';
+    }else if(button[1]=="4"){
+        bottom = '3';
+        top= '5';
+    }else if(button[1]=="5"){
+        bottom = '4';
+        top= '6';
+    }else if(button[1]=="6"){
+        bottom = '5';
+        top= 'x';
+    }
+}
 
 
 //SLOTS to choosing ships
@@ -690,63 +765,21 @@ void Ships::setshipsbuttonsclicked(QPushButton *p1)
     QString cords=p1->objectName();
     playerships.push_back(cords);
 
-    QString firstCordLeft;
-    QString firstCordRight;
-    QString secondCordLeft;
-    QString secondCordRight;
+    locateButtons(cords);
 
-    if(p1->objectName()[0]=="A"){                       //THAT fragment is needed to block buttons that are not in side of ship pieces
-        firstCordLeft = 'x';
-        firstCordRight= 'B';
-    }else if(p1->objectName()[0]=="B"){
-        firstCordLeft = 'A';
-        firstCordRight= 'C';
-    }else if(p1->objectName()[0]=="C"){
-        firstCordLeft = 'B';
-        firstCordRight= 'D';
-    }else if(p1->objectName()[0]=="D"){
-        firstCordLeft = 'C';
-        firstCordRight= 'E';
-    }else if(p1->objectName()[0]=="E"){
-        firstCordLeft = 'D';
-        firstCordRight= 'F';
-    }else if(p1->objectName()[0]=="F"){
-        firstCordLeft = 'E';
-        firstCordRight= 'x';
-    }
-    if(p1->objectName()[1]=="1"){
-        secondCordLeft = 'x';
-        secondCordRight= '2';
-    }else if(p1->objectName()[0]=="2"){
-        secondCordLeft = '1';
-        secondCordRight= '3';
-    }else if(p1->objectName()[0]=="3"){
-        secondCordLeft = '2';
-        secondCordRight= '4';
-    }else if(p1->objectName()[0]=="4"){
-        secondCordLeft = '3';
-        secondCordRight= '5';
-    }else if(p1->objectName()[0]=="5"){
-        secondCordLeft = '4';
-        secondCordRight= '6';
-    }else if(p1->objectName()[0]=="6"){
-        secondCordLeft = '5';
-        secondCordRight= 'x';
-    }
-    QString button1 = firstCordLeft+secondCordRight;
-    QString button2 = firstCordLeft+secondCordLeft;
-    QString button3 = firstCordRight+secondCordLeft;
-    QString button4 = firstCordRight+secondCordRight;
 
-    if(needed==4) {
-            p1->setStyleSheet("background-color:#80f442; border:1px solid #0b253d;");
-    }
-    else if(needed==3) {
-        p1->setStyleSheet("background-color:#80f442; border:1px solid #d60835;");
-    }
-    else if(needed==2){
-        p1->setStyleSheet("background-color:#80f442; border:1px solid #0a88ff;");
-    }
+    //changing color
+    QString styleSheet4 = "background-color:#80f442; border:1px solid #0b253d;";
+    QString styleSheet3 = "background-color:#80f442; border:1px solid #d60835;";
+    QString styleSheet2 = "background-color:#80f442; border:1px solid #0a88ff;";
+    if(needed==4) p1->setStyleSheet(styleSheet4);
+    else if(needed==3) p1->setStyleSheet(styleSheet3);
+    else if(needed==2) p1->setStyleSheet(styleSheet2);
+
+
+//
+    if(counter == 0) rememeberedPlayerShip = p1;          //remembering position of first element of the ship
+
     counter++;
     if(counter==needed)
     {
@@ -754,6 +787,99 @@ void Ships::setshipsbuttonsclicked(QPushButton *p1)
         disable_your_buttons();
         ui->actionButton->setEnabled(true);
     }
+    else if(counter == 1)
+    {
+        disable_your_buttons();
+
+        buttonTop = cords[0] + bottom;
+        buttonBottom = cords[0] + top;
+        buttonLeft = left + cords[1];
+        buttonRight = right + cords[1];
+
+
+        if(buttonTop[0] != 'x' && buttonTop[1] != 'x'){
+            convertStringToButton(buttonTop);
+            if(requiredButton->styleSheet()!=styleSheet4 && requiredButton->styleSheet()!=styleSheet3 &&  requiredButton->styleSheet()!=styleSheet2) requiredButton->setEnabled(true);
+        }
+        if(buttonBottom[0] != 'x' && buttonBottom[1] != 'x'){
+            convertStringToButton(buttonBottom);
+            if(requiredButton->styleSheet()!=styleSheet4 && requiredButton->styleSheet()!=styleSheet3 &&  requiredButton->styleSheet()!=styleSheet2) requiredButton->setEnabled(true);
+        }
+        if(buttonLeft[0] != 'x' && buttonLeft[1] != 'x'){
+            convertStringToButton(buttonLeft);
+            if(requiredButton->styleSheet()!=styleSheet4 && requiredButton->styleSheet()!=styleSheet3 &&  requiredButton->styleSheet()!=styleSheet2) requiredButton->setEnabled(true);
+        }
+        if(buttonRight[0] != 'x' && buttonRight[1] != 'x'){
+            convertStringToButton(buttonRight);
+            if(requiredButton->styleSheet()!=styleSheet4 && requiredButton->styleSheet()!=styleSheet3 &&  requiredButton->styleSheet()!=styleSheet2) requiredButton->setEnabled(true);
+        }
+    }
+
+    else if(counter == 2 ||counter == 3)
+    {
+        disable_your_buttons();
+
+        if(p1->objectName() == buttonTop){
+            buttonTop = cords[0] + bottom;
+            locateButtons(rememeberedPlayerShip->objectName());
+            buttonBottom = rememeberedPlayerShip->objectName()[0] + top;
+
+            if(buttonTop[0] != 'x' && buttonTop[1] != 'x'){
+                convertStringToButton(buttonTop);
+                if(requiredButton->styleSheet()!=styleSheet4 && requiredButton->styleSheet()!=styleSheet3 &&  requiredButton->styleSheet()!=styleSheet2) requiredButton->setEnabled(true);
+            }
+            if(buttonBottom[0] != 'x' && buttonBottom[1] != 'x'){
+                convertStringToButton(buttonBottom);
+                if(requiredButton->styleSheet()!=styleSheet4 && requiredButton->styleSheet()!=styleSheet3 &&  requiredButton->styleSheet()!=styleSheet2) requiredButton->setEnabled(true);
+            }
+        }
+        else if(p1->objectName() == buttonBottom){
+            buttonBottom = cords[0] + top;
+            locateButtons(rememeberedPlayerShip->objectName());
+            buttonTop = rememeberedPlayerShip->objectName()[0] + bottom;
+
+            if(buttonBottom[0] != 'x' && buttonBottom[1] != 'x'){
+                convertStringToButton(buttonBottom);
+                if(requiredButton->styleSheet()!=styleSheet4 && requiredButton->styleSheet()!=styleSheet3 &&  requiredButton->styleSheet()!=styleSheet2) requiredButton->setEnabled(true);
+            }
+            if(buttonTop[0] != 'x' && buttonTop[1] != 'x'){
+                convertStringToButton(buttonTop);
+                if(requiredButton->styleSheet()!=styleSheet4 && requiredButton->styleSheet()!=styleSheet3 &&  requiredButton->styleSheet()!=styleSheet2) requiredButton->setEnabled(true);
+            }
+        }
+        else if(p1->objectName() == buttonLeft){
+            buttonLeft = left + cords[1];
+            locateButtons(rememeberedPlayerShip->objectName());
+            buttonRight = right + rememeberedPlayerShip->objectName()[1];
+
+            if(buttonLeft[0] != 'x' && buttonLeft[1] != 'x'){
+                convertStringToButton(buttonLeft);
+                if(requiredButton->styleSheet()!=styleSheet4 && requiredButton->styleSheet()!=styleSheet3 &&  requiredButton->styleSheet()!=styleSheet2) requiredButton->setEnabled(true);
+            }
+            if(buttonRight[0] != 'x' && buttonRight[1] != 'x'){
+                convertStringToButton(buttonRight);
+                if(requiredButton->styleSheet()!=styleSheet4 && requiredButton->styleSheet()!=styleSheet3 &&  requiredButton->styleSheet()!=styleSheet2) requiredButton->setEnabled(true);
+            }
+        }
+        else if(p1->objectName() == buttonRight){
+            buttonRight = right + cords[1];
+            locateButtons(rememeberedPlayerShip->objectName());
+            buttonLeft = left + rememeberedPlayerShip->objectName()[1];
+
+            if(buttonRight[0] != 'x' && buttonRight[1] != 'x'){
+                convertStringToButton(buttonRight);
+                if(requiredButton->styleSheet()!=styleSheet4 && requiredButton->styleSheet()!=styleSheet3 &&  requiredButton->styleSheet()!=styleSheet2) requiredButton->setEnabled(true);
+            }
+            if(buttonLeft[0] != 'x' && buttonLeft[1] != 'x'){
+                convertStringToButton(buttonLeft);
+                if(requiredButton->styleSheet()!=styleSheet4 && requiredButton->styleSheet()!=styleSheet3 &&  requiredButton->styleSheet()!=styleSheet2) requiredButton->setEnabled(true);
+            }
+        }
+
+
+    }
+
+
     p1->setEnabled(false);
 }
 void Ships::on_A1_clicked()

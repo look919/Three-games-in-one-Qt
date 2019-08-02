@@ -20,24 +20,6 @@ private slots:
     void on_guesstheletterbutton_clicked();
     void on_guessthepasswordbutton_clicked();
 
-    void createtableword();
-    void setui();
-
-    void debugger();
-    void addwordstolist();
-
-    void computerguesses();
-    void endscreen();
-    void setuiforpc(QString s1);
-    void makewordlistshorter(QString s1);
-    void conditionaloflistelements();
-
-
-    void delay(int n);
-    void betteralphabetinvec();
-    void worsealphabetinvec();
-    void randomchar();
-
     void on_giveupbutton_clicked();
 
     void on_easylevel_clicked();
@@ -58,6 +40,27 @@ private:
 
     QVector <QString> listofwords;
 
+    bool returnNonRandomChar();
+    int index;
+
+    void createtableword();
+    void setui();
+
+    void debugger();
+    void addwordstolist();
+
+    void computerguesses();
+    void endscreen();
+    void setuiforpc(QString s1);
+    void makewordlistshorter(QString s1);
+    void conditionaloflistelements();
+
+
+
+    void delay(int n);
+    void betteralphabetinvec();
+    void worsealphabetinvec();
+    void randomchar();
 
     QVector <QString> alphabet;
     QVector <QString> earLetters;
