@@ -166,7 +166,6 @@ private:
     QString buttonBottom;
     QString buttonLeft;
     QString buttonRight;
-    QPushButton *storage;
 
     QVector <QString> computershots;
     QVector <QString> playershots;

@@ -777,7 +777,7 @@ void Ships::setshipsbuttonsclicked(QPushButton *p1)
     else if(needed==2) p1->setStyleSheet(styleSheet2);
 
 
-
+//
     if(counter == 0) rememeberedPlayerShip = p1;          //remembering position of first element of the ship
 
     counter++;
