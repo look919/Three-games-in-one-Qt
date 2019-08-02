@@ -237,19 +237,21 @@ void Guessmyword::computerguesses()
              setuiforpc(earLetters[random]);
              makewordlistshorter(earLetters[random]);
              conditionaloflistelements();
+             guessedletters.push_back(earLetters[random]);
              debugger();
              earLetters.erase(earLetters.begin()+random);
+
              k--;
          }
-             while(computerscore==100)
-             {
-                     delay(3);
-                     randomchar();
-                     setuiforpc(randchar);
-                     makewordlistshorter(randchar);
-                     conditionaloflistelements();
-                     debugger();
-            }
+         while(computerscore==100)
+         {
+             delay(3);
+             randomchar();
+             setuiforpc(randchar);
+             makewordlistshorter(randchar);
+             conditionaloflistelements();
+             debugger();
+         }
 
              endscreen();
     }                       //end of lvl hard starting normal bellow
@@ -261,6 +263,7 @@ void Guessmyword::computerguesses()
         delay(3);
         setuiforpc("e");
         makewordlistshorter("e");
+        guessedletters.push_back("e");
         conditionaloflistelements();
         debugger();
 
@@ -307,8 +310,6 @@ void Guessmyword::computerguesses()
          endscreen();
     }
 }
-
-
 
 
 void Guessmyword::setuiforpc(QString s1)
@@ -395,7 +396,7 @@ void Guessmyword::conditionaloflistelements()
         ui->password->hide();
         ifexist=true;
     }
-    else if (listofwords.size()<=1)
+    else if (listofwords.size()==1)
     {
         ui->lettershower->setStyleSheet("font-size: 16px;");
         ui->lettershower->setText("In my opinion the world is ->");
@@ -437,7 +438,7 @@ void Guessmyword::conditionaloflistelements()
             ui->commentator->setStyleSheet("font-size: 14px;");
             ui->commentator->setText("Yay! I was right!");
             ui->lettershower->hide();
-             ui->password->hide();
+            ui->password->hide();
         }
         else
         {
@@ -445,12 +446,67 @@ void Guessmyword::conditionaloflistelements()
             ui->commentator->setStyleSheet("font-size: 14px;");
             ui->commentator->setText("Oh no! I should've know that!");
             ui->lettershower->hide();
-             ui->password->hide();
+            ui->password->hide();
         }
         ui->table->setText(generatedword);
         ui->table->setAlignment(Qt::AlignCenter);
     }
 }
+void Guessmyword::randomchar()
+{
+    index=0;
+    if(listofwords.size()<=30 && level == 3)
+    {
+        returnNonRandomChar();
+    }
+    else if(listofwords.size()<=15 && level == 2)
+    {
+        returnNonRandomChar();
+    }
+    else if(listofwords.size()<=5 && level == 1)
+    {
+        returnNonRandomChar();
+    }
+    else{
+        int random;
+        bool error=false;
+
+        random=rand()%alphabet.size();
+        randchar=alphabet[random];
+
+        for(int i=0;i<guessedletters.size();i++)
+        {
+            if(guessedletters[i]==randchar) error=true;
+        }
+        if(error) randomchar();
+        else guessedletters.push_back(randchar);
+    }
+
+}
+bool Guessmyword::returnNonRandomChar()
+{
+    int word = 0;
+    if(index>=4) {
+        word++;
+        index = 0;
+    }
+
+    bool letter = false;
+    for(int i=0; i<guessedletters.size();i++){
+       if(listofwords.at(word)[index] == guessedletters.at(i)) letter = true;
+    }
+    if(letter){
+        index++;
+        returnNonRandomChar();
+    }
+    else{
+        randchar = listofwords.at(word)[index];
+        guessedletters.push_back(listofwords.at(word)[index]);
+        return true;
+    }
+}
+
+
 
 void Guessmyword::endscreen()
 {
@@ -594,21 +650,7 @@ void Guessmyword::worsealphabetinvec()
     alphabet.push_back("q");
 }
 
-void Guessmyword::randomchar()
-{
-    int random;
-    bool error=false;
 
-    random=rand()%alphabet.size();
-    randchar=alphabet[random];
-
-    for(int i=0;i<guessedletters.size();i++)
-    {
-        if(guessedletters[i]==randchar) error=true;
-    }
-    if(error) randomchar();
-    else guessedletters.push_back(randchar);
-}
 
 void Guessmyword::on_giveupbutton_clicked()
 {
@@ -677,9 +719,7 @@ void Guessmyword::on_hardlevel_clicked()
 
 void Guessmyword::debugger()
 {
-
     qDebug()<<listofwords.size();
-
 }
 
 void Guessmyword::addwordstolist()
@@ -2980,18 +3020,20 @@ void Guessmyword::addwordstolist()
     generatedword=listofwords[random];
     wordlength=generatedword.length();
 
-    if(level==1)
-       {
-            if((wordlength<7) || (wordlength>12)) goto rand;
-       }
-   if(level==2)
-       {
-            if(wordlength<6 || wordlength>12) goto rand;
-       }
     if(level==3)
-       {
-            if((wordlength<5) || (wordlength>12)) goto rand;
-       }
+    {
+       if((wordlength<5) || (wordlength>12)) goto rand;
+    }
+    else if(level==2)
+    {
+       if(wordlength<6 || wordlength>12) goto rand;
+    }
+    else if(level==1)
+    {
+       if((wordlength<7) || (wordlength>12)) goto rand;
+    }
+
+
 }
 
 

@@ -91,6 +91,9 @@
      <pointsize>30</pointsize>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: #13b2ad; border: 1px solid black;</string>
    </property>
@@ -111,6 +114,9 @@
     <font>
      <pointsize>30</pointsize>
     </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: #13b2ad; border: 1px solid black;</string>
@@ -214,6 +220,9 @@ p, li { white-space: pre-wrap; }
      <bold>true</bold>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: #111111; color:white; border: 1px solid black;</string>
    </property>
@@ -234,6 +243,9 @@ p, li { white-space: pre-wrap; }
     <font>
      <pointsize>30</pointsize>
     </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: #13b2ad; border: 1px solid black;</string>
@@ -259,6 +271,9 @@ p, li { white-space: pre-wrap; }
      <pointsize>30</pointsize>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: #13b2ad; border: 1px solid black;</string>
    </property>
@@ -282,6 +297,9 @@ p, li { white-space: pre-wrap; }
     <font>
      <pointsize>30</pointsize>
     </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: #13b2ad; border: 1px solid black;</string>
@@ -307,6 +325,9 @@ p, li { white-space: pre-wrap; }
      <pointsize>30</pointsize>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: #13b2ad; border: 1px solid black;</string>
    </property>
@@ -316,17 +337,6 @@ p, li { white-space: pre-wrap; }
    <property name="flat">
     <bool>false</bool>
    </property>
-  </widget>
-  <widget class="QWidget" name="formLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>150</y>
-     <width>160</width>
-     <height>80</height>
-    </rect>
-   </property>
-   <layout class="QFormLayout" name="formLayout"/>
   </widget>
   <zorder>quitbutton</zorder>
   <zorder>authorbutton</zorder>
@@ -339,7 +349,6 @@ p, li { white-space: pre-wrap; }
   <zorder>startGuessMyWord</zorder>
   <zorder>startTrainYourMemory</zorder>
   <zorder>startShips</zorder>
-  <zorder>formLayoutWidget</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>

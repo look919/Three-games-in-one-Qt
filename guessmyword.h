@@ -33,6 +33,7 @@ private slots:
     void conditionaloflistelements();
 
 
+
     void delay(int n);
     void betteralphabetinvec();
     void worsealphabetinvec();
@@ -57,6 +58,9 @@ private:
     bool ifexist;
 
     QVector <QString> listofwords;
+
+    bool returnNonRandomChar();
+    int index;
 
 
     QVector <QString> alphabet;
