@@ -18,9 +18,7 @@ public:
 
 private slots:
 
-    void startRound();
-
-    void on_anybutton_clicked(QPushButton *n);
+    //void on_anybutton_clicked(QPushButton *n);
     void on_button1_clicked();
     void on_button2_clicked();
     void on_button3_clicked();
@@ -31,6 +29,16 @@ private slots:
     void on_button8_clicked();
     void on_button9_clicked();
 
+
+
+private:
+    Ui::Trainyourmemory *ui;
+    bool playGame;
+    int roundCounter;
+
+
+    void on_anybutton_clicked(QPushButton *n);
+    void startRound();
     void paintRandomButtonOnGreen();
     void paintRandomButtonOnRed();
     void cleanButtons();
@@ -40,11 +48,6 @@ private slots:
     void enable_buttons();
     void disable_buttons();
     void delay(int n);
-
-private:
-    Ui::Trainyourmemory *ui;
-    bool playGame;
-    int roundCounter;
 
     QString clickedButtonName;
     QVector<QString> buttons;
